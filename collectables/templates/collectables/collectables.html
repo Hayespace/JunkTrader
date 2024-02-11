@@ -26,11 +26,11 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
                                 {% if collectable.image %}
-                                <a href="">
+                                <a href="{% url 'collectable_detail' collectable.pk %}">
                                     <img class="card-img-top img-fluid" src="{{ collectable.image.url }}" alt="{{ collectable.name }}">
                                 </a>
                                 {% else %}
-                                <a href="">
+                                <a href="{% url 'collectable_detail' collectable.pk %}">
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ collectable.name }}">
                                 </a>
                                 {% endif %}
