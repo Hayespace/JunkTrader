@@ -11,6 +11,6 @@ class CollectableAdmin(admin.ModelAdmin):
         'image',
     )
 
-    ordering = ('name',)
+    ordering = ('id',)
 
 admin.site.register(Collectable, CollectableAdmin)
