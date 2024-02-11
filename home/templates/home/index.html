@@ -10,15 +10,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
+    <div class="container mt-5 ">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-7 col-md-6 text-center">
                 <h1 class="display-4 logo-font text-black">
-                    Welcome to Junk Trader
+                    Trade your way to freedom!
                 </h1>
                 <div class="my-5">
+                    <a href="" class="btn btn-black rounded-0 btn-lg">
+                        <span class="text-uppercase">BAG</span>
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </a>
                     <h4>
-                        <a href="" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Start Game</a>
+                        <a href="{% url 'items' %}" class="btn btn-lg btn-black rounded-0 text-uppercase py-3">Start Trading Now</a>
                     </h4>
                 </div>
             </div>
