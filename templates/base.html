@@ -1,22 +1,22 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
 
     {% block meta %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
     {% block extra_meta %}
     {% endblock %}
 
-    <!-- Bootstrap CSS -->
     {% block corecss %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}
@@ -32,41 +32,32 @@
     {% block extra_js %}
     {% endblock %}
 
-    <title>{% block extra_title %}{% endblock %}</title>
-</head>
-<body>
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#">JUNK TRADER</a>
-           
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
-                    <!-- DAYS Progress Bar for Large Screens -->
-                    <div class="d-none d-lg-block">
-                        DAYS
-                        <div class="progress" style="width: 400px;">
-                            <div class="progress-bar" role="progressbar" style="width: 3.33%;" aria-valuenow="3.33"
-                                aria-valuemin="1" aria-valuemax="30">1/30 Days
-                            </div>
+    <title>Junk Trader {% block extra_title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header class="container-fluid fixed-top">
+        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+                <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                    <h2 class="logo-font text-black my-0"><strong>Junk</strong> Trader</h2>
+                </a>
+            </div>
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+                <form method="GET" action="">
+                    <div class="input-group w-100">
+                        <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
+                        <div class="input-group-append">
+                            <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                                <span class="icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- DAYS Progress Bar for Small Screens -->
-                    <div class="d-lg-none">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 3.33%;" aria-valuenow="3.33"
-                                aria-valuemin="1" aria-valuemax="30">1/30 Days
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="navbar-nav">
+                </form>
+            </div>
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+                <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
@@ -77,7 +68,7 @@
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Item Management</a>
+                                    <a href="" class="dropdown-item">Product Management</a>
                                 {% endif %}
                                 <a href="" class="dropdown-item">My Profile</a>
                                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -88,9 +79,9 @@
                         </div>
                     </li>
                     <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
+                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
                             <div class="text-center">
-                                <div><i class="fa-solid fa-wallet"></i></div>
+                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
                                         ${{ grand_total|floatformat:2 }}
@@ -103,88 +94,37 @@
                     </li>
                 </ul>
             </div>
-        </nav>
-    
-   
-        
-        <div class="row text-center">
-            <div class="col">
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0"></div>
+        </div>
+        <div class="row bg-white">
+            <nav class="navbar navbar-expand-lg navbar-light w-100">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+               {% include 'includes/mobile-top-header.html' %}
+               {% include 'includes/main-nav.html' %}
+            </nav>
+        </div>
+        <div id="delivery-banner" class="row text-center">
+            <div class="col bg-black text-white">
+                <h4 class="logo-font my-1">Free delivery on orders over ${{ free_delivery_threshold }}!</h4>                
             </div>            
         </div>
-
-
-       
     </header>
-     
-    <!-- Flex container for sidebar and main content -->
-    <div class="d-flex flex-column flex-md-row">
 
-        <!-- Sidebar -->
-        <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar nav-pad">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <!-- Travel Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="travelDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-plane"></i> Travel
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="travelDropdown">
-                            <!-- Location Links -->
-                            <a class="dropdown-item" href="#location1">Location 1</a>
-                            <a class="dropdown-item" href="#location2">Location 2</a>
-                            <!-- Add more location links as needed -->
-                        </div>
-                    </li>
-                    <!-- Cards with Modals -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#modal1">
-                            Card 1
-                        </a>
-                    </li>
-                    <!-- Add more cards as needed -->
-                </ul>
-            </div>
-            
-</nav>
+    {% if messages %}
+        <div class="message-container"></div>
+    {% endif %}
+
+    {% block page_header %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block postloadjs %}
+    {% endblock %}
 
 
-            <!-- Main Content Area -->
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                {% block content %}{% endblock %}
-            </main>
-            
-            <!-- Toolbar for smaller screens -->
-            <div class="toolbar">
-                <a href="#" class="text-black">
-                    <div class="text-center">
-                        <div><i class="fa-solid fa-plane"></i></div>
-                        <p class="my-0">Travel</p>
-                    </div>
-                </a>
-                <a href="#" class="text-black">
-                    <div class="text-center">
-                        <div><i class="fa-solid fa-comments-dollar"></i></div>
-                        <p class="my-0">Loans</p>
-                    </div>
-                </a>
-                <a href="#" class="text-black">
-                    <div class="text-center">
-                        <div><i class="fa-solid fa-bag-shopping"></i></div>
-                        <p class="my-0">Bag</p>
-                    </div>
-                </a>
-                <a href="#" class="text-black">
-                    <div class="text-center">
-                        <div><i class="fa-solid fa-shop"></i></div>
-                        <p class="my-0">Upgrades</p>
-                    </div>
-                </a>
-                <!-- Add more toolbar items as needed -->
-            </div>
-
-        </div>
-    </div>
-
-</body>
-
+  </body>
 </html>
