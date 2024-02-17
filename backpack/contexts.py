@@ -1,11 +1,9 @@
-from django.conf import settings
-
 def backpack_contents(request):
-
     backpack_items = []
     total = 0
     collectable_count = 0
-
+    
+    grand_total = total  # Assuming there's no additional delivery cost
 
     context = {
         'backpack_items': backpack_items,
