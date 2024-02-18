@@ -16,6 +16,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Sono:wght@200..800&display=swap" rel="stylesheet">
     {% endblock %}
 
     {% block extra_css %}
@@ -29,9 +32,11 @@
     {% endblock %}
 
     {% block extra_js %}
+  
     {% endblock %}
 
     <title>Junk Trader {% block extra_title %}{% endblock %}</title>
+  
 </head>
 <body>
 <header class="container-fluid fixed-top">
@@ -41,7 +46,7 @@
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 text-center"> 
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <h2 class="logo-font text-black my-0"><img src="/media/junktraderlogo.png" width="400" class="d-block"></h2>
+                        <h2 class="logo-font text-black my-0"><img src="/media/logo.png" width="400" class="d-block"></h2>
                     </a>
                 </div>
                 <div class="col-lg-3"></div>
@@ -123,6 +128,55 @@
 {% endblock %}
 
 {% block postloadjs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+
+<script>
+    // Initialize Three.js scene
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('glb-canvas-{{ collectable.id }}') });
+
+    // Set camera position
+    camera.position.z = 5;
+
+    // Load GLB file
+    {% if collectable.glb_file %}
+    var loader = new THREE.GLTFLoader();
+    loader.load(
+        // Resource URL
+        '{{ collectable.glb_file.url }}',
+        // Called when the resource is loaded
+        function (gltf) {
+            scene.add(gltf.scene);
+        },
+        // Called while loading is progressing
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // Called when loading has errors
+        function (error) {
+            console.error('An error happened', error);
+        }
+    );
+    {% endif %}
+
+    // Resize canvas on window resize
+    window.addEventListener('resize', function () {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
+
+    // Render loop
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
 {% endblock %}
 
 </body>

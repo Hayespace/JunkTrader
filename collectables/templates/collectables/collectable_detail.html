@@ -12,67 +12,69 @@
 {% block content %}
    <!-- <div class="overlay"></div> -->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
-                <div class="image-container my-5">
-                    {% if collectable.image %}
-                        <a href="{{ collectable.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid" src="{{ collectable.image.url }}" alt="{{ collectable.name }}">
-                        </a>
-                        {% else %}
-                        <a href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ collectable.name }}">
-                        </a>
-                    {% endif %}
+        <div class="row justify-content-center"> <!-- Center the model viewer -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card my-5">
+                    <div class="image-container">
+                        {% if collectable.glb_file %}
+                        <!-- <canvas id="glb-canvas-{{ collectable.id }}" class="card-img-top" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></canvas> -->
+                        <model-viewer id="neutral-demo" tone-mapping="commerce" camera-controls touch-action="pan-y" auto-rotate alt="Hammer" src="{{ collectable.glb_file.url }}" ar environment-image="{{ collectable.glb_file.url }}" poster="{{ collectable.glb_file.url }}" shadow-intensity="0" camera-controls touch-action="pan-y" style="width: 100%; height: 400px;"></model-viewer> 
+                     {% endif %}
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
-                <div class="product-details-container mb-5 mt-md-5">
-                    <p class="mb-0">{{ collectable.name }}</p>
-                    <p class="lead mb-0 text-left font-weight-bold">${{ collectable.price }}</p>
-                    <p class="mt-3">{{ collectable.description }}</p>
-                    <form class="form" action="{% url 'add_to_backpack' collectable.id %}" method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="col-12">
-                                <p class="mt-3"><strong>Quantity:</strong></p>
-                                <div class="form-group w-50">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <button class="decrement-qty btn btn-black rounded-0" 
-                                                data-item_id="{{ collectable.id }}" id="decrement-qty_{{ collectable.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-minus"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                        <input class="form-control qty_input" type="number"
-                                            name="quantity" value="1" min="1" max="99"
-                                            data-item_id="{{ collectable.id }}"
-                                            id="id_qty_{{ collectable.id }}">
-                                        <div class="input-group-append">
-                                            <button class="increment-qty btn btn-black rounded-0"
-                                                data-item_id="{{ collectable.id }}" id="increment-qty_{{ collectable.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-plus"></i>
-                                                </span>
-                                            </button>
+                <div class="card product-details-container mb-5 mt-md-5">
+                    <div class="card-body">
+                        <p class="card-title mb-0">{{ collectable.name }}</p>
+                        <p class="lead mb-0 font-weight-bold">${{ collectable.price }}</p>
+                        <p class="card-text mt-3">{{ collectable.description }}</p>
+                        <form class="form" action="{% url 'add_to_backpack' collectable.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <p class="mt-3"><strong>Quantity:</strong></p>
+                                    <div class="form-group w-50">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button class="decrement-qty btn btn-black rounded-0" 
+                                                    data-item_id="{{ collectable.id }}" id="decrement-qty_{{ collectable.id }}">
+                                                    <span class="icon">
+                                                        <i class="fas fa-minus"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <input class="form-control qty_input" type="number"
+                                                name="quantity" value="1" min="1" max="99"
+                                                data-item_id="{{ collectable.id }}"
+                                                id="id_qty_{{ collectable.id }}">
+                                            <div class="input-group-append">
+                                                <button class="increment-qty btn btn-black rounded-0"
+                                                    data-item_id="{{ collectable.id }}" id="increment-qty_{{ collectable.id }}">
+                                                    <span class="icon">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                            <div class="col-12">
-                                <a href="{% url 'collectables' %}" class="btn btn-outline-black rounded-0 mt-5">
-                                    <span class="icon">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="text-uppercase">Keep Trading</span>
-                                </a>
-                                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Buy">
+                                <div class="col-12">
+                                    <a href="{% url 'collectables' %}" class="btn btn-outline-black rounded-0 mt-5">
+                                        <span class="icon">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>
+                                        <span class="text-uppercase">Keep Trading</span>
+                                    </a>
+                                    <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Buy">
+                                </div>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             </div>
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,5 +83,25 @@
 
 {% block postloadjs %}
 {{ block.super }}
-{% include 'collectables/includes/quantity_input_script.html' %}
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+ 
+<script>
+function reloadLighting() {
+    var viewers = document.getElementsByTagName('model-viewer')
+    if (viewers.length > 0) {
+      var viewer = viewers[0];
+      viewer.addEventListener('load', function() {
+        var imgSrc = viewer.getAttribute('environment-image');
+        var background = new Image();
+        background.src = imgSrc;
+        viewer.setAttribute('environment-image', imgSrc);
+      });
+    }
+  }
+  
+  // Event Listeners
+  window.addEventListener('load', function() {
+    reloadLighting();
+  });
+</script>
 {% endblock %}

@@ -28,7 +28,7 @@ body {
 }
 
 .shop-now-button {
-    background: black;
+    background: rgb(163, 18, 18);
     color: white;
     min-width: 260px;
 }
@@ -86,8 +86,23 @@ body {
  color: white;
 }
 
+.main-logo-link {
+    margin-bottom: -60px;
+}
 
-/* -------------------------------- Media Queries */
+#delivery-banner {
+    background-color: rgba(151, 9, 9, 0.768);
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 50px;
+}
+
+p, h1, h2, h3, h4, h5, h6{
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-size: x-large;
+    font-style: normal;
+}
 
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {

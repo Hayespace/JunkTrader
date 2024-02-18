@@ -12,8 +12,8 @@
 {% block content %}
     <!--<div class="overlay"></div>-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col text-center mt-3">
+        <div class="row pt-4">
+            <div class="col text-center mt-3 text-white">
                 <h2 class="logo-font">Items</h2>
                 <hr class="w-50 mb-1">
             </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     {% for collectable in collectables %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <div class="card h-100 border-0">
+                            <div class="card h-100 border-2 bg-black text-white">
                                 {% if collectable.image %}
                                 <a href="{% url 'collectable_detail' collectable.pk %}">
                                     <img class="card-img-top img-fluid" src="{{ collectable.image.url }}" alt="{{ collectable.name }}">
@@ -34,10 +34,10 @@
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ collectable.name }}">
                                 </a>
                                 {% endif %}
-                                <div class="card-body pb-0">
+                                <div class="card-body pb-0 ">
                                     <p class="mb-0">{{ collectable.name }}</p>
                                 </div>
-                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                <div class="card-footer pt-0 border-0 text-left bg-black text-white">
                                     <div class="row">
                                         <div class="col">
                                             <p class="lead mb-0 text-left font-weight-bold">${{ collectable.price }}</p>
