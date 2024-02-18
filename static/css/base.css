@@ -82,6 +82,10 @@ body {
     cursor: pointer;
 }
 
+.backpack-text {
+ color: white;
+}
+
 
 /* -------------------------------- Media Queries */
 

@@ -11,7 +11,7 @@
 
 {% block content %}
 <!--  <div class="overlay"></div> -->
-<div class="container mb-2">
+<div class="container mb-2 backpack-text">
     <div class="row">
         <div class="col">
             <hr>
@@ -24,9 +24,19 @@
         <div class="col">
             {% if backpack_items %}
             <div class="rounded shadow-sm border p-3 bg-black">
+                <div class="pt-5 text-center rounded shadow-sm border p-1 bg-black">
+                    <h4 class="mb-2 "><strong>Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                    <p class="my-4">
+                        {% if total_quantity %}
+                         Items: {{ total_quantity }} / 100
+                        {% else %}
+                            0 items
+                        {% endif %}
+                    </p>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-sm table-borderless">
-                        <thead class="text-black">
+                        <thead class="text-white">
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Item</th>
@@ -42,13 +52,13 @@
                                 <img class="img-fluid rounded" src="{{ item.collectable.image.url }}" width="100" height="100">
                             </td>
                             <td class="py-3">
-                                <p class="my-0"><strong>{{ item.collectable.name }}</strong></p>
+                                <p class="my-0 text-white"><strong>{{ item.collectable.name }}</strong></p>
                             </td>
                             <td class="py-3">
-                                <p class="my-0">${{ item.collectable.price }}</p>
+                                <p class="my-0 text-white">${{ item.collectable.price }}</p>
                             </td>
-                            <td class="py-3 w-25">
-                                <form class="form update_form" method="POST" action="">
+                            <td class="py-3 w-25 text-white">
+                                <form class="form update_form" method="POST" action="{% url 'adjust_backpack' item.item_id %}">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <div class="input-group">
@@ -79,17 +89,15 @@
                                 <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-size="{{ item.size }}"><small>Sell</small></a>
                             </td>
                             <td class="py-3">
-                                <p class="my-0">${{ item.collectable.price }}</p>
+                                <!-- Subtotal calculated dynamically using JavaScript -->
+                                <p class="my-0 text-white" id="subtotal_{{ item.item_id }}"></p>
                             </td>
                         </tr>
                         {% endfor %}
                     </table>
                 </div>
             </div>
-            <div class="pt-5 text-right">
-                <h6><strong>Backpack Total: ${{ total|floatformat:2 }}</strong></h6>
-                <h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
-            </div>
+          
             {% else %}
             <p class="lead mb-5">Your backpack is empty.</p>
             <a href="{% url 'collectables' %}" class="btn btn-outline-black rounded-0 btn-lg">
@@ -128,6 +136,14 @@
              location.reload();
          });
     })
+
+    // Calculate subtotal dynamically
+    {% for item in backpack_items %}
+    var quantity = {{ item.quantity }};
+    var price = {{ item.collectable.price }};
+    var subtotal = quantity * price;
+    $('#subtotal_{{ item.item_id }}').text('$' + subtotal.toFixed(2));
+    {% endfor %}
 </script>
 
 {% endblock %}

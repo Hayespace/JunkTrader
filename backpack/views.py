@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 # Create your views here.
 
@@ -21,5 +21,21 @@ def add_to_backpack(request, item_id):
 
     request.session['backpack'] = backpack
     return redirect(redirect_url)
+
+
+def adjust_backpack(request, item_id):
+    """Adjust the quantity of the specified product to the specified amount"""
+
+    quantity = int(request.POST.get('quantity'))
+    backpack = request.session.get('backpack', {})
+
+    if quantity > 0:
+        backpack[item_id] = quantity
+    else:
+        backpack.pop(item_id, None)
+
+    request.session['backpack'] = backpack
+    return redirect(reverse('open_backpack'))
+
 
 
