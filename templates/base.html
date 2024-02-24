@@ -46,7 +46,7 @@
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 text-center"> 
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <h2 class="logo-font text-black my-0"><img src="/media/logo.png" width="400" class="d-block"></h2>
+                        <h2 class="logo-font text-c my-0"><img src="/media/logo.png" width="400" class="d-block"></h2>
                     </a>
                 </div>
                 <div class="col-lg-3"></div>
@@ -128,54 +128,26 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
-
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+ 
 <script>
-    // Initialize Three.js scene
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('glb-canvas-{{ collectable.id }}') });
-
-    // Set camera position
-    camera.position.z = 5;
-
-    // Load GLB file
-    {% if collectable.glb_file %}
-    var loader = new THREE.GLTFLoader();
-    loader.load(
-        // Resource URL
-        '{{ collectable.glb_file.url }}',
-        // Called when the resource is loaded
-        function (gltf) {
-            scene.add(gltf.scene);
-        },
-        // Called while loading is progressing
-        function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        // Called when loading has errors
-        function (error) {
-            console.error('An error happened', error);
-        }
-    );
-    {% endif %}
-
-    // Resize canvas on window resize
-    window.addEventListener('resize', function () {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        renderer.setSize(width, height);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-    });
-
-    // Render loop
-    function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
+function reloadLighting() {
+    var viewers = document.getElementsByTagName('model-viewer');
+    if (viewers.length > 0) {
+        var viewer = viewers[0];
+        viewer.addEventListener('load', function() {
+            var imgSrc = viewer.getAttribute('environment-image');
+            var background = new Image();
+            background.src = imgSrc;
+            viewer.setAttribute('environment-image', imgSrc);
+        });
     }
-    animate();
+}
+
+// Event Listeners
+window.addEventListener('load', function() {
+    reloadLighting();
+});
 </script>
 {% endblock %}
 

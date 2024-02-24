@@ -23,8 +23,8 @@
     <div class="row">
         <div class="col">
             {% if backpack_items %}
-            <div class="rounded shadow-sm border p-3 bg-black">
-                <div class="pt-5 text-center rounded shadow-sm border p-1 bg-black">
+            <div class=" box p-3">
+                <div class=" pt-5 text-center p-1 bg-black">
                     <h4 class="mb-2 "><strong>Total: ${{ grand_total|floatformat:2 }}</strong></h4>
                     <p class="my-4">
                         {% if total_quantity %}
@@ -49,8 +49,19 @@
                         {% for item in backpack_items %}
                         <tr>
                             <td class="p-3 w-25">
-                                <img class="img-fluid rounded" src="{{ item.collectable.image.url }}" width="100" height="100">
+                                <div class="image-container">
+                                    {% if item.collectable.glb_file %}
+                                        <model-viewer id="neutral-demo-{{ item.item_id }}"
+                                                      src="{{ item.collectable.glb_file.url }}"
+                                                      alt="{{ item.collectable.name }}"
+                                                      camera-controls
+                                                      auto-rotate
+                                                      style="width: 100%; height: 100px;" 
+                                        </model-viewer> 
+                                    {% endif %}
+                                </div>
                             </td>
+                            
                             <td class="py-3">
                                 <p class="my-0 text-white"><strong>{{ item.collectable.name }}</strong></p>
                             </td>
@@ -63,7 +74,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="decrement-qty btn btn-sm btn-black rounded-0" 
+                                                <button class="decrement-qty btn btn-sm btn-red rounded-0" 
                                                     data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
                                                     <span>
                                                         <i class="fas fa-minus fa-sm"></i>
@@ -75,7 +86,7 @@
                                                 data-item_id="{{ item.item_id }}"
                                                 id="id_qty_{{ item.item_id }}">
                                             <div class="input-group-append">
-                                                <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                <button class="increment-qty btn btn-sm btn-red rounded-0"
                                                     data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
                                                     <span>
                                                         <i class="fas fa-plus fa-sm"></i>
@@ -116,6 +127,8 @@
 {{ block.super }}
 {% include 'collectables/includes/quantity_input_script.html' %}
 
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
 <script type="text/javascript">
     // Update quantity on click
     $('.update-link').click(function(e) {
@@ -144,6 +157,9 @@
     var subtotal = quantity * price;
     $('#subtotal_{{ item.item_id }}').text('$' + subtotal.toFixed(2));
     {% endfor %}
+
+
 </script>
 
 {% endblock %}
+

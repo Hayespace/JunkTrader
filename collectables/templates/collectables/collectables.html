@@ -24,20 +24,18 @@
                 <div class="row">
                     {% for collectable in collectables %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <div class="card h-100 border-2 bg-black text-white">
-                                {% if collectable.image %}
+                            <div class="card box h-100 border-2 text-white">
+                                {% if collectable.glb_file %}
                                 <a href="{% url 'collectable_detail' collectable.pk %}">
-                                    <img class="card-img-top img-fluid" src="{{ collectable.image.url }}" alt="{{ collectable.name }}">
+                                    <model-viewer id="model-viewer-{{ collectable.id }}" src="{{ collectable.glb_file.url }}" alt="{{ collectable.name }}" camera-controls style="width: 100%; height: 200px;"></model-viewer>
                                 </a>
                                 {% else %}
-                                <a href="{% url 'collectable_detail' collectable.pk %}">
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ collectable.name }}">
-                                </a>
                                 {% endif %}
                                 <div class="card-body pb-0 ">
                                     <p class="mb-0">{{ collectable.name }}</p>
                                 </div>
-                                <div class="card-footer pt-0 border-0 text-left bg-black text-white">
+                                <div class="card-footer pt-0 border-0 text-left text-white">
                                     <div class="row">
                                         <div class="col">
                                             <p class="lead mb-0 text-left font-weight-bold">${{ collectable.price }}</p>
@@ -71,4 +69,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
 {% endblock %}

@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-5!7u_lrh$a!cgedxsu43+pt9m0kcp5&m&q$1v)w-!93fds%2xv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-hayespace-junktrader-sqdmypbr5n8.ws-eu108.gitpod.io',
+    '8000-hayespace-junktrader-cjwhvxxkbp3.ws-eu108.gitpod.io',
     'localhost',
     '127.0.0.1',
 ]
