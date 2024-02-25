@@ -16,15 +16,22 @@ def collectable_detail(request, collectable_id):
     }
     return render(request, 'collectables/collectable_detail.html', context)
 
+from django.shortcuts import redirect
+
 def add_to_backpack(request, item_id):
     """Adjust the quantity of an item in the backpack"""
 
     quantity_str = request.POST.get('quantity')
-    if quantity_str is None:
-        # Redirect to the previous page with an error message if quantity is not provided
+    if not quantity_str:
+        # Redirect to the collectable detail page with an error message if quantity is not provided
         return redirect('collectable_detail', collectable_id=item_id)
 
-    quantity = int(quantity_str)
+    try:
+        quantity = int(quantity_str)
+    except ValueError:
+        # Redirect to the collectable detail page with an error message if quantity is not a valid integer
+        return redirect('collectable_detail', collectable_id=item_id)
+
     redirect_url = request.POST.get('redirect_url', '/backpack/') 
 
     # Get backpack from session or initialize it as an empty dictionary
@@ -42,6 +49,7 @@ def add_to_backpack(request, item_id):
 
     # Redirect to the specified URL
     return redirect(redirect_url)
+
 
 def sell_item(request, item_id):
     quantity_str = request.POST.get('quantity')
@@ -70,3 +78,4 @@ def sell_item(request, item_id):
 
     # Redirect to the collectable detail page
     return redirect('collectable_detail', collectable_id=item_id)
+

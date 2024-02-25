@@ -37,3 +37,4 @@ def backpack_contents(request):
 def total_amount(request):
     total_amount = 10000  
     return {'total_amount': total_amount}
+

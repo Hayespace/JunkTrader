@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'home',
     'collectables',
     'backpack',
+    'places',
     
 ]
 

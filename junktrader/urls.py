@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('collectables/', include('collectables.urls')),
     path('backpack/', include('backpack.urls')),
+    path('places/', include('places.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,15 +5,22 @@ def open_backpack(request):
     """A view that renders the backpack contents page"""
     return render(request, 'backpack/backpack.html')
 
+from django.shortcuts import redirect
+
 def adjust_backpack(request, item_id):
     """Adjust the quantity of an item in the backpack"""
 
     quantity_str = request.POST.get('quantity')
-    if quantity_str is None:
+    if not quantity_str:
         # Redirect to the previous page with an error message if quantity is not provided
         return redirect('open_backpack')  # Adjust the URL name as needed
 
-    quantity = int(quantity_str)
+    try:
+        quantity = int(quantity_str)
+    except ValueError:
+        # Redirect to the previous page with an error message if quantity is not a valid integer
+        return redirect('open_backpack')  # Adjust the URL name as needed
+
     redirect_url = request.POST.get('redirect_url', '/backpack/') 
 
     # Get backpack from session or initialize it as an empty dictionary
@@ -31,6 +38,7 @@ def adjust_backpack(request, item_id):
 
     # Redirect to the specified URL
     return redirect(redirect_url)
+
 
 
 def sell_item(request, item_id):

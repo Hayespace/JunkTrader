@@ -19,6 +19,9 @@ body {
     width: 1.5rem;
 }
 
+.logo {
+    margin-left: 2%;
+}
 
 .main-logo-link {
     width: fit-content;
@@ -183,6 +186,28 @@ p, h1, h2, h3, h4, h5, h6{
 .modal-footer {
     background-color: #00000093;
     border-top: none;
+}
+
+.panel-top {
+    margin-top: 200px;
+    
+}
+
+.fixed-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px; /* Adjust the width as needed */
+    border: 1px solid red; 
+    box-shadow: 0 0 10px red;
+    background-color: #00000093;
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+}
+
+
+.content-column {
+    padding-left: 5%; /* Adjust the padding to shift content away from the fixed panel */
 }
 
 

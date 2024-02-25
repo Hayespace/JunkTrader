@@ -10,7 +10,21 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mb-2 backpack-text">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Fixed Panel -->
+            <div class="fixed-panel">
+                {% include 'includes/fixed_panel.html' %}
+            </div>
+        </div>
+        <div class="col-md-9"> 
+            <!-- Main content goes here -->
+        </div>
+    </div>
+</div>
+
+<div class="container mb-2 backpack-text content-column">
     <div class="row">
         <div class="col">
             <hr>

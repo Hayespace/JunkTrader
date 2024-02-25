@@ -1,0 +1,27 @@
+<script>
+    function updatePrices() {
+        //  request to update collectable prices
+        $.ajax({
+            url: "{% url 'update_collectable_prices' %}",
+            type: "GET",
+            success: function(response) {
+                
+            },
+            error: function(xhr, errmsg, err) {
+                // Optionally handle error
+            }
+        });
+    }
+</script>
+
+<div class="fixed-panel ">
+    <h1 class="text-white text-center p-4">Travel</h1>
+    <img>
+<ul class="location-list text-left p-4 list-unstyled">
+    <li><p><a href="{% url 'collectables' %}" onclick="updatePrices()"><i class="fas fa-industry fa-lg"></i> Abandoned Factory</a></p></li>
+    <li><p><a href="{% url 'collectables' %}" onclick="updatePrices()"><i class="fas fa-xmarks-lines fa-lg"></i> The Outlands</a></p></li>
+    <li><p><a href="{% url 'collectables' %}" onclick="updatePrices()"><i class="fas fa-fire fa-lg"></i> Tyre Fire</a></p></li>
+    <li><p><a href="{% url 'collectables' %}" onclick="updatePrices()"><i class="fas fa-water fa-lg"></i> Boggy Marsh</a></p></li>
+    <li><p><a href="{% url 'collectables' %}" onclick="updatePrices()"><i class="fas fa-city fa-lg"></i> Decaying City</a></p></li>
+</ul>
+</div>
