@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-4">
@@ -54,95 +55,63 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="buyModalLabel{{ collectable.id }}">Buy {{ collectable.name }}</h5>
+                <h5 class="modal-title" id="buyModalLabel{{ item.item_id }}">Buy {{ item.collectable.name }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="modal-form" id="buyForm{{ collectable.id }}">
+            <form class="modal-form" method="POST" action="{% url 'add_to_backpack' collectable.id %}">
                 {% csrf_token %}
                 <div class="modal-body">
+                    <p>Owned: {{ item.quantity }}</p>
                     <div class="form-group">
-                        <label for="buyQuantity{{ collectable.id }}">Quantity:</label>
-                        <input type="number" class="form-control" id="buyQuantity{{ collectable.id }}" name="quantity" min="0">
+                        <label for="buyQuantity{{ item.item_id }}">Enter Quantity to Buy:</label>
+                        <input type="number" class="form-control" id="buyQuantity{{ item.item_id }}" name="quantity" min="0" max="99">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="buyItem({{ collectable.id }})">Buy</button>
+                    <button type="submit" class="btn btn-success">Buy</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 <!-- Sell Modal -->
 <div class="modal fade" id="sellModal{{ collectable.id }}" tabindex="-1" role="dialog" aria-labelledby="sellModalLabel{{ collectable.id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sellModalLabel{{ collectable.id }}">Sell {{ collectable.name }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form class="modal-form" id="sellForm{{ collectable.id }}">
-                {% csrf_token %}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="sellQuantity{{ collectable.id }}">Quantity:</label>
-                        <input type="number" class="form-control" id="sellQuantity{{ collectable.id }}" name="quantity" min="0">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="sellItem({{ collectable.id }})">Sell</button>
-                </div>
-            </form>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="sellModalLabel{{ item.item_id }}">Sell {{ item.collectable.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
+        <form class="modal-form" method="POST" action="{% url 'sell_item' collectable.id %}">
+            {% csrf_token %}
+            <div class="modal-body">
+                <p>Owned: {{ item.quantity }}</p>
+                <div class="form-group">
+                    <label for="sellQuantity{{ item.item_id }}">Enter Quantity to Sell:</label>
+                    <input type="number" class="form-control" id="sellQuantity{{ item.item_id }}" name="quantity" min="0" max="{{ item.quantity }}">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Sell</button>
+            </div>
+        </form>
     </div>
 </div>
+</div>
+
 {% endblock %}
 
 {% block postloadjs %}
+
 {{ block.super }}
-<script>
-        function buyItem(itemId) {
-            var quantityToAdd = parseInt($('#buyQuantity'+itemId).val());
-            console.log('Quantity to Add:', quantityToAdd); // Debugging
-            $('#buyModal'+itemId).modal('hide');  // Close the modal
 
-            // Get the current quantity in the backpack
-            var currentQuantity = parseInt($('#sellQuantity'+itemId).val());
-            console.log('Current Quantity:', currentQuantity); // Debugging
-
-            // Calculate the new quantity after buying
-            var newQuantity = currentQuantity + quantityToAdd;
-            console.log('New Quantity:', newQuantity); // Debugging
-
-            // Update the quantity in the backpack display
-            $('#sellQuantity'+itemId).val(newQuantity);
-            $('#quantityDisplay'+itemId).text(newQuantity);
-        }
-
-        function sellItem(itemId) {
-            var quantity = parseInt($('#sellQuantity'+itemId).val());
-            console.log('Sell Quantity:', quantity); // Debugging
-            $('#sellModal'+itemId).modal('hide');  // Close the modal
-            var currentQuantity = parseInt($('#sellQuantity'+itemId).text()); // Fetch current quantity from the table cell
-            console.log('Current Quantity:', currentQuantity); // Debugging
-            var newQuantity = currentQuantity - quantity;
-            console.log('New Quantity:', newQuantity); // Debugging
-            $('#sellQuantity'+itemId).text(newQuantity);  
-        }
-
-        // Calculate subtotal 
-        {% for item in backpack_items %}
-        var quantity_{{ item.item_id }} = {{ item.quantity }};
-        var price_{{ item.item_id }} = {{ item.collectable.price }};
-        var subtotal_{{ item.item_id }} = quantity_{{ item.item_id }} * price_{{ item.item_id }};
-        $('#subtotal_{{ item.item_id }}').text('$' + subtotal_{{ item.item_id }}.toFixed(2));
-        {% endfor %}
-</script>
 
 {% endblock %}
+
+
