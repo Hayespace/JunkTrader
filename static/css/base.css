@@ -226,6 +226,7 @@ p, h1, h2, h3, h4, h5, h6{
     #delivery-banner .list-inline-item {
         max-width: none; /* Remove max-width for items */
     }
+    
 }
 
 
@@ -234,6 +235,44 @@ p, h1, h2, h3, h4, h5, h6{
   .container {
     max-width: 80%;
   }
+}
+
+
+@media (max-width: 767px) {
+    .fixed-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10%; /* Adjust the height as needed */
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    
+    .location-list {
+        display: flex;
+        flex-direction: row; /* Change direction to horizontal for smaller screens */
+        flex-wrap: nowrap; /* Prevent wrapping of items */
+        justify-content: space-around; /* Adjust alignment as needed */
+        align-items: center; /* Adjust alignment as needed */
+    }
+    
+    .location-list li {
+        flex: 0 0 auto; /* Allow items to grow or shrink */
+        padding: 5px; /* Adjust padding as needed */
+    }
+    
+    .location-text {
+        display: none; /* Hide text on smaller screens */
+    }
+    
+    h1 {
+        display: none; /* Hide the heading on smaller screens */
+    }
+
+    .logo {
+        display: none;
+    }
 }
 
 /* fixed top navbar only on medium and up */
@@ -259,4 +298,13 @@ p, h1, h2, h3, h4, h5, h6{
     body {
         height: calc(100vh - 116px);
     }
+}
+
+@media (max-width: 1300px) {
+    .fixed-panel {
+        border: none;
+        box-shadow: none;
+        background-color: #00000011;
+    }
+
 }

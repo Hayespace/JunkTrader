@@ -88,20 +88,6 @@
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center text-white">
-                                <div><i class="fas fa-walking fa-lg"></i></div>
-                                <p id="current-place" class="my-0">Travel</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="location-options">
-                            <!-- Populate dropdown with locations dynamically -->
-                            {% for location in locations %}
-                                <a href="{% url 'location_detail' location.id %}" class="dropdown-item location-item" data-location-id="{{ location.id }}" data-location-name="{{ location.name }}">{{ location.name }}</a>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center text-white">
                                 <div><i class="fas fa-gear fa-lg"></i></div>
                                 <p class="my-0">Account</p>
                             </div>
