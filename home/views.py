@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 
 def index(request):
     if request.method == 'POST':
-        # Check if the form is submitted
-        # Initialize player's funds with $10,000
-        request.session['player_funds'] = 10000
-        # Redirect to the collectables page
+        difficulty = request.POST.get('difficulty')
+        if difficulty == 'easy':
+            request.session['player_funds'] = 20000
+        elif difficulty == 'medium':
+            request.session['player_funds'] = 10000
+        elif difficulty == 'difficult':
+            request.session['player_funds'] = 5000
         return redirect('collectables')
     else:
         return render(request, 'home/index.html')
