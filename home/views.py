@@ -12,3 +12,10 @@ def index(request):
         return redirect('collectables')
     else:
         return render(request, 'home/index.html')
+
+def reset_session(request):
+    # Clear backpack items
+    request.session['backpack'] = {}
+    # Reset player funds
+    request.session['player_funds'] = 0
+    return redirect('home')
