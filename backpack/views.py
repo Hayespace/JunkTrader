@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from collectables.models import Collectable
 from django.contrib import messages
+from decimal import Decimal
 
 def open_backpack(request):
     """A view that renders the backpack contents page"""
@@ -41,6 +44,10 @@ def adjust_backpack(request, item_id):
         else:
             backpack[item_id] = quantity
 
+        # Update player funds
+        item = get_object_or_404(Collectable, pk=item_id)
+        request.session['player_funds'] = str(Decimal(request.session['player_funds']) - (item.price * quantity))
+
     # Update the session with the modified backpack
     request.session['backpack'] = backpack
 
@@ -71,6 +78,10 @@ def sell_item(request, item_id):
             # If the remaining quantity is zero or negative, remove the item from the backpack
             if backpack[str(item_id)] <= 0:
                 del backpack[str(item_id)]
+                
+            # Update player funds
+            item = get_object_or_404(Collectable, pk=item_id)
+            request.session['player_funds'] = str(Decimal(request.session['player_funds']) + (item.price * quantity_to_sell))
         else:
             # Display an error message if trying to sell more than available in the backpack
             messages.error(request, "Quantity to sell exceeds available quantity in backpack.")

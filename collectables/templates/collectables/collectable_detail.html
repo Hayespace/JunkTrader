@@ -52,9 +52,7 @@
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buyModal{{ collectable.id }}">
                         Buy
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sellModal{{ collectable.id }}">
-                        Sell
-                    </button>
+                    
                 </div>
             </div>
         </div>
@@ -88,32 +86,7 @@
         </div>
     </div>
 </div>
-<!-- Sell Modal -->
-<div class="modal fade" id="sellModal{{ collectable.id }}" tabindex="-1" role="dialog" aria-labelledby="sellModalLabel{{ collectable.id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="sellModalLabel{{ item.item_id }}">Sell {{ item.collectable.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <form class="modal-form" method="POST" action="{% url 'sell_item' collectable.id %}">
-            {% csrf_token %}
-            <div class="modal-body">
-                <p>Owned: {{ item.quantity }}</p>
-                <div class="form-group">
-                    <label for="sellQuantity{{ item.item_id }}">Enter Quantity to Sell:</label>
-                    <input type="number" class="form-control" id="sellQuantity{{ item.item_id }}" name="quantity" min="0" max="{{ item.quantity }}">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Sell</button>
-            </div>
-        </form>
-    </div>
-</div>
+
 </div>
 
 {% endblock %}

@@ -116,11 +116,13 @@ def sell_item(request, item_id):
                 
                 # Update player funds
                 item = get_object_or_404(Collectable, pk=item_id)
-                request.session['player_funds'] = str(Decimal(request.session['player_funds']) + (item.price * quantity_to_sell))
+                print(f"Item price: {item.price}, Quantity to sell: {quantity_to_sell}")
+                print(f"Current player funds: {request.session['player_funds']}")
+                request.session['player_funds'] = str(Decimal(request.session['player_funds']) - (item.price * quantity_to_sell))
+                print(f"Updated player funds: {request.session['player_funds']}")
 
     # Update the session with the modified backpack
     request.session['backpack'] = backpack
 
     # Redirect to the specified URL
     return redirect(redirect_url)
-
