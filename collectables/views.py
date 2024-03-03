@@ -6,6 +6,27 @@ from django.contrib import messages
 from decimal import Decimal
 import random
 
+
+def increment_days_played(request):
+    try:
+        # Get the current days played count from the session
+        days_played = request.session.get('days_played', 0)
+        
+        # Increment the days played count by 1
+        days_played += 1
+        
+        # Limit the days played count to a maximum of 30
+        days_played = min(days_played, 30)
+        
+        # Update the days played count in the session
+        request.session['days_played'] = days_played
+        
+        # Return a success response
+        return JsonResponse({'success': True})
+    except Exception as e:
+        # Return an error response if an exception occurs
+        return JsonResponse({'error': str(e)}, status=500)
+
 @never_cache
 def update_collectable_prices(request):
     try:
@@ -98,7 +119,7 @@ def sell_item(request, item_id):
 
     redirect_url = request.POST.get('redirect_url', '/backpack/') 
 
-    # Get backpack from session or initialize it as an empty dictionary
+    # Get backpack from session 
     backpack = request.session.get('backpack', {})
     
     if quantity_to_sell > 0:

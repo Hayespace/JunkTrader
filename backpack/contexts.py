@@ -39,3 +39,8 @@ def total_amount(request):
     total_amount = [0] 
     return {'total_amount': total_amount}
 
+def days_played(request):
+    # Retrieve the number of days played from the session
+    return {'days_played': request.session.get('days_played', 0)}
+
+

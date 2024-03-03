@@ -26,26 +26,44 @@
                 url: "{% url 'reset_session' %}",
                 type: "GET",
                 success: function(response) {
-                    // Redirect to the home page
                     window.location.href = "{% url 'home' %}";
                 },
                 error: function(err) {
-                    // Handle error if necessary
                     window.location.href = "{% url 'home' %}"; // Redirect to home page even if there's an error
                 }
             });
         }
+    }
+
+    // Function to increment the days played count
+    function incrementDaysPlayed() {
+        // Request to increment the days played count
+        $.ajax({
+            url: "{% url 'increment_days_played' %}",
+            type: "GET",
+            success: function(response) {
+                // Update the days played count in the HTML
+                var daysPlayedElement = document.getElementById('days-played');
+                var daysPlayed = parseInt(daysPlayedElement.innerText);
+                daysPlayed += 1;
+                daysPlayed = Math.min(daysPlayed, 30);
+                daysPlayedElement.innerText = daysPlayed;
+            },
+            error: function(err) {
+                // Handle error if necessary
+            }
+        });
     }
 </script>
 
 <div class="fixed-panel">
     <h1 class="text-white text-center mt-5 p-4">Travel</h1>
     <ul class="location-list text-left p-4 list-unstyled">
-        <li><a href="#" onclick="updatePrices()"><i class="fas fa-industry fa-xl"></i><span class="location-text"> <p>Abandoned Factory</p></span></a></li>
-        <li><a href="#" onclick="updatePrices()"><i class="fas fa-xmarks-lines fa-lg"></i><span class="location-text"> <p>The Outlands</p></span></a></li>
-        <li><a href="#" onclick="updatePrices()"><i class="fas fa-fire fa-lg"></i><span class="location-text"> <p>Tyre Fire</p></span></a></li>
-        <li><a href="#" onclick="updatePrices()"><i class="fas fa-water fa-lg"></i><span class="location-text"> <p>Boggy Marsh</p></span></a></li>
-        <li><a href="#" onclick="updatePrices()"><i class="fas fa-city fa-lg"></i><span class="location-text"> <p>Decaying City</p></span></a></li>
+        <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-industry fa-xl"></i><span class="location-text"> <p>Abandoned Factory</p></span></a></li>
+        <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-xmarks-lines fa-lg"></i><span class="location-text"> <p>The Outlands</p></span></a></li>
+        <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-fire fa-lg"></i><span class="location-text"> <p>Tyre Fire</p></span></a></li>
+        <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-water fa-lg"></i><span class="location-text"> <p>Boggy Marsh</p></span></a></li>
+        <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-city fa-lg"></i><span class="location-text"> <p>Decaying City</p></span></a></li>
     </ul>
     <div class="text-center mb-1">
         <button class="btn-red btn-lg mt-5 text-right" onclick="exitGame()" class="btn btn-secondary btn-lg mt-4">Exit Game</button>

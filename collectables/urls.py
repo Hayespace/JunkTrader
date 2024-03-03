@@ -7,4 +7,5 @@ urlpatterns = [
     path('update_prices/', views.update_collectable_prices, name='update_collectable_prices'),
     path('add/<int:item_id>/', views.add_to_backpack, name='add_to_backpack'),
     path('sell/<int:collectable_id>/', views.sell_item, name='sell_item'),
+    path('increment_days_played/', views.increment_days_played, name='increment_days_played'),
 ]

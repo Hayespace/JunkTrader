@@ -13,14 +13,22 @@ def index(request):
         
         # Set default backpack capacity to 50
         request.session['backpack_capacity'] = 50
+
+        # Initialize days played to 1
+        request.session['days_played'] = 1
         
         return redirect('collectables')
     else:
-        return render(request, 'home/index.html')
+        # Get the days played count from session data
+        days_played = request.session.get('days_played', 0)
+        return render(request, 'home/index.html', {'days_played': days_played})
+
 
 def reset_session(request):
     # Clear backpack items
     request.session['backpack'] = {}
     # Reset player funds
     request.session['player_funds'] = 0
+    # Reset days played
+    request.session['days_played'] = 0
     return redirect('home')

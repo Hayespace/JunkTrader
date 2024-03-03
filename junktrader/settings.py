@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'backpack.contexts.backpack_contents',
                 'backpack.contexts.total_amount',  # Add total_amount context processor here
+                'backpack.contexts.days_played',
             ],
         },
     },
