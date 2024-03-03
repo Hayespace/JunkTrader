@@ -10,6 +10,10 @@ def index(request):
             request.session['player_funds'] = 10000
         elif difficulty == 'difficult':
             request.session['player_funds'] = 5000
+        
+        # Set default backpack capacity to 50
+        request.session['backpack_capacity'] = 50
+        
         return redirect('collectables')
     else:
         return render(request, 'home/index.html')

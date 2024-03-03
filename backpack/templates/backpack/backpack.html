@@ -140,6 +140,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
+                                item id is {{ item.item_id }}
                                 <form class="modal-form" method="POST" action="{% url 'sell_item' item.item_id %}">
                                     {% csrf_token %}
                                     <div class="modal-body">

@@ -30,6 +30,7 @@ def backpack_contents(request):
         'total_quantity': total_quantity, 
         'collectable_count': collectable_count,
         'grand_total': grand_total,
+          
     }
 
     return context

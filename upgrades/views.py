@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+# views.py
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Upgrade
 
 def all_upgrades(request):
@@ -6,6 +7,8 @@ def all_upgrades(request):
     context = {'upgrades': upgrades}
     return render(request, 'upgrades/all_upgrades.html', context)
 
-def upgrade_detail(request, upgrade_id):
+def purchase_upgrade(request, upgrade_id):
     upgrade = get_object_or_404(Upgrade, pk=upgrade_id)
-    return render(request, 'upgrades/upgrade_detail.html', {'upgrade': upgrade})
+    # Update session data with the new capacity
+    request.session['backpack_capacity'] = upgrade.capacity
+    return redirect('open_backpack')
