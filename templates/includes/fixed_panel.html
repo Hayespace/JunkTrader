@@ -7,10 +7,23 @@
             url: "{% url 'update_collectable_prices' %}?location_id=" + locationId,
             type: "GET",
             success: function(response) {
-                // Handle success, maybe update UI to reflect updated prices
             },
             error: function(err) {
-                // Optionally handle error
+            }
+        });
+    }
+    
+    function exitGame() {
+        // Perform actions to exit the game
+        window.location.href = "{% url 'home' %}";
+        
+        // Clear session data for player funds and items from the backpack
+        $.ajax({
+            url: "{% url 'reset_session' %}",
+            type: "GET",
+            success: function(response) {
+            },
+            error: function(err) {
             }
         });
     }
@@ -31,4 +44,3 @@
         <button class="btn-red btn-lg mt-5 text-right" onclick="exitGame()" class="btn btn-secondary btn-lg mt-4">Exit Game</button>
     </div>
 </div>
-
