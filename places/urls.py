@@ -1,9 +1,7 @@
-# urls.py
-
 from django.urls import path
-from .views import update_collectable_prices, locations
+from .views import update_collectable_prices
 
 urlpatterns = [
-    path('update_collectable_prices/', update_collectable_prices, name='update_collectable_prices'),
-    path('locations/', locations, name='locations'),
+    path('update_prices/', update_collectable_prices, name='update_collectable_prices'),
+    
 ]

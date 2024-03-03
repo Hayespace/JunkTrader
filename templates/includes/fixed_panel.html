@@ -1,44 +1,51 @@
 <!-- fixed_panel.html -->
 <script>
-
-    function updatePrices(locationId) {
-        //  request to update collectable prices for the selected location
+    function updatePrices() {
+        // Request to update collectable prices for all items
         $.ajax({
-            url: "{% url 'update_collectable_prices' %}?location_id=" + locationId,
+            url: "{% url 'update_collectable_prices' %}",
             type: "GET",
             success: function(response) {
+                // Redirect to the collectables page
+                window.location.href = "{% url 'collectables' %}";
             },
             error: function(err) {
+                // Handle error if necessary
             }
         });
     }
     
     function exitGame() {
         // Perform actions to exit the game
-        window.location.href = "{% url 'home' %}";
+        var confirmExit = confirm("Are you sure you want to quit?");
         
-        // Clear session data for player funds and items from the backpack
-        $.ajax({
-            url: "{% url 'reset_session' %}",
-            type: "GET",
-            success: function(response) {
-            },
-            error: function(err) {
-            }
-        });
+        // If the user confirms, proceed with exiting the game
+        if (confirmExit) {
+            // Clear session data for player funds and items from the backpack
+            $.ajax({
+                url: "{% url 'reset_session' %}",
+                type: "GET",
+                success: function(response) {
+                    // Redirect to the home page
+                    window.location.href = "{% url 'home' %}";
+                },
+                error: function(err) {
+                    // Handle error if necessary
+                    window.location.href = "{% url 'home' %}"; // Redirect to home page even if there's an error
+                }
+            });
+        }
     }
-
 </script>
 
 <div class="fixed-panel">
     <h1 class="text-white text-center mt-5 p-4">Travel</h1>
-    <ul class="location-list text-left p-4 text list-unstyled">
-        {% for location in locations %}
-            <li>
-                <img src="{{ location.picture.url }}" alt="{{ location.name }}">
-                <p>{{ location.name }}</p>
-            </li>
-        {% endfor %}
+    <ul class="location-list text-left p-4 list-unstyled">
+        <li><a href="#" onclick="updatePrices()"><i class="fas fa-industry fa-xl"></i><span class="location-text"> <p>Abandoned Factory</p></span></a></li>
+        <li><a href="#" onclick="updatePrices()"><i class="fas fa-xmarks-lines fa-lg"></i><span class="location-text"> <p>The Outlands</p></span></a></li>
+        <li><a href="#" onclick="updatePrices()"><i class="fas fa-fire fa-lg"></i><span class="location-text"> <p>Tyre Fire</p></span></a></li>
+        <li><a href="#" onclick="updatePrices()"><i class="fas fa-water fa-lg"></i><span class="location-text"> <p>Boggy Marsh</p></span></a></li>
+        <li><a href="#" onclick="updatePrices()"><i class="fas fa-city fa-lg"></i><span class="location-text"> <p>Decaying City</p></span></a></li>
     </ul>
     <div class="text-center mb-1">
         <button class="btn-red btn-lg mt-5 text-right" onclick="exitGame()" class="btn btn-secondary btn-lg mt-4">Exit Game</button>
