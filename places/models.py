@@ -1,5 +1,4 @@
-# places/models.py
-
+# models.py
 from django.db import models
 
 class Location(models.Model):

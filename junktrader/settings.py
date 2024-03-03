@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'collectables',
     'backpack',
     'places',
+    'upgrades',
     
 ]
 

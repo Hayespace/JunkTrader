@@ -35,6 +35,6 @@ def backpack_contents(request):
     return context
 
 def total_amount(request):
-    total_amount = 10000  
+    total_amount = [0] 
     return {'total_amount': total_amount}
 

@@ -1,12 +1,13 @@
+<!-- fixed_panel.html -->
 <script>
 
-    function updatePrices() {
-        //  request to update collectable prices
+    function updatePrices(locationId) {
+        //  request to update collectable prices for the selected location
         $.ajax({
-            url: "{% url 'update_collectable_prices' %}",
+            url: "{% url 'update_collectable_prices' %}?location_id=" + locationId,
             type: "GET",
             success: function(response) {
-                
+                // Handle success, maybe update UI to reflect updated prices
             },
             error: function(err) {
                 // Optionally handle error
@@ -14,40 +15,20 @@
         });
     }
 
-    function exitGame() {
-        // Prompt the user with a confirmation dialog
-        if (confirm('Are you sure you want to quit?')) {
-            // Reset session ID
-            fetch('{% url 'reset_session' %}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Redirect to home page
-                    window.location.href = '{% url 'home' %}';
-                } else {
-                    console.error('Failed to reset session ID');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
-    }
 </script>
 
 <div class="fixed-panel">
     <h1 class="text-white text-center mt-5 p-4">Travel</h1>
-    <ul class="location-list text-left p-4 list-unstyled">
-        <li><a href="" onclick="updatePrices()"><i class="fas fa-industry fa-xl"></i><span class="location-text"> <p>Abandoned Factory</p></span></a></li>
-        <li><a href="" onclick="updatePrices()"><i class="fas fa-xmarks-lines fa-lg"></i><span class="location-text"> <p>The Outlands</p></span></a></li>
-        <li><a href="" onclick="updatePrices()"><i class="fas fa-fire fa-lg"></i><span class="location-text"> <p>Tyre Fire</p></span></a></li>
-        <li><a href="" onclick="updatePrices()"><i class="fas fa-water fa-lg"></i><span class="location-text"> <p>Boggy Marsh</p></span></a></li>
-        <li><a href="" onclick="updatePrices()"><i class="fas fa-city fa-lg"></i><span class="location-text"> <p>Decaying City</p></span></a></li>
-        
+    <ul class="location-list text-left p-4 text list-unstyled">
+        {% for location in locations %}
+            <li>
+                <img src="{{ location.picture.url }}" alt="{{ location.name }}">
+                <p>{{ location.name }}</p>
+            </li>
+        {% endfor %}
     </ul>
     <div class="text-center mb-1">
         <button class="btn-red btn-lg mt-5 text-right" onclick="exitGame()" class="btn btn-secondary btn-lg mt-4">Exit Game</button>
     </div>
 </div>
+

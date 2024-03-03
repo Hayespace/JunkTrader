@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Fixed Panel -->
+            <div class="fixed-panel">
+                {% include 'includes/fixed_panel.html' %}
+            </div>
+        </div>
+        <div class="col-md-9"> 
+            <!-- Main content goes here -->
+        </div>
+    </div>
+</div>
+<div class="container-fluid content-column">
+    <div class="container mb-2 backpack-text content-column">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb-4">Upgrades</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            {% for upgrade in upgrades %}
+                <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3"> 
+                    <div class="card box h-100 border-2 text-white">
+                        {% if upgrade.glb_file %}
+                        <a href="">
+                            <model-viewer id="model-viewer-{{ upgrade.id }}" src="{{ upgrade.glb_file.url }}" alt="{{ upgrade.name }}" camera-controls style="width: 100%; height: 200px;"></model-viewer>
+                        </a>
+                        {% else %}
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ upgrade.name }}">
+                        {% endif %}
+                        <div class="card-body pb-0">
+                            <p class="mb-0">{{ upgrade.name }}</p>
+                        </div>
+                        <div class="card-footer pt-0 border-0 text-left text-white">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="lead mb-0 text-left font-weight-bold">${{ upgrade.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+{% endblock %}

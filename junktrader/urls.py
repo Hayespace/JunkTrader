@@ -11,5 +11,7 @@ urlpatterns = [
     path('collectables/', include('collectables.urls')),
     path('backpack/', include('backpack.urls')),
     path('places/', include('places.urls')),
+    # Update the include statement for 'upgrades.urls'
+    path('upgrades/', include(('upgrades.urls', 'upgrades'), namespace='upgrades')),
     path('reset-session/', reset_session, name='reset_session'),  # Add the URL pattern for reset_session
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
