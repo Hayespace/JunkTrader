@@ -40,10 +40,10 @@
                 <div class="pt-5 text-center p-1 bg-black">
                     <h4 class="mb-2 "><strong>Total: ${{ grand_total|floatformat:2 }}</strong></h4>
                     <p class="my-4">
-                        {% if total_quantity %}
-                         Items: {{ total_quantity }} / 100
+                        {% if request.session.backpack_capacity %}
+                            Capacity: {{ total_quantity }} / {{ request.session.backpack_capacity }}
                         {% else %}
-                            0 items
+                            Capacity: {{ total_quantity }} / 100
                         {% endif %}
                     </p>
                 </div>
@@ -140,7 +140,6 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                item id is {{ item.item_id }}
                                 <form class="modal-form" method="POST" action="{% url 'sell_item' item.item_id %}">
                                     {% csrf_token %}
                                     <div class="modal-body">
@@ -184,13 +183,14 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 
 <script>
-
         // Calculate subtotal 
         {% for item in backpack_items %}
         var quantity_{{ item.item_id }} = {{ item.quantity }};

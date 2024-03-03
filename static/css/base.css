@@ -275,6 +275,15 @@ p, h1, h2, h3, h4, h5, h6{
     }
 }
 
+/*.message-container {
+    border: 1px solid red; 
+    box-shadow: 0 0 10px red;
+    background-color: #00000093;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {

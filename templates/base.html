@@ -3,155 +3,143 @@
 <!doctype html>
 <html lang="en">
 <head>
-    {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% endblock %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {% block extra_meta %}
-    {% endblock %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Sono:wght@200..800&display=swap" rel="stylesheet">
 
-    {% block corecss %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Sono:wght@200..800&display=swap" rel="stylesheet">
-        
-    {% endblock %}
-
-    {% block extra_css %}
-    {% endblock %}
-
-    {% block corejs %}
     <script src="https://kit.fontawesome.com/b6beb2ebf7.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    {% endblock %}
-
-    {% block extra_js %}
-    {% endblock %}
-
     <title>Junk Trader {% block extra_title %}{% endblock %}</title>
-  
 </head>
 <body>
-   
-    <header class="container-fluid fixed-top">
-        <div id="topnav" class="row pt-lg-2 d-none d-lg-flex justify-content-center">
-            <div class="col-lg-12">
-               
-            </div>
+
+<header class="container-fluid fixed-top">
+    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex justify-content-center">
+        <div class="col-lg-12">
+
         </div>
-     
-        <div id="delivery-banner" class="row text-center">
-            <div class="logo"> 
-                <h2 class="logo-font text-c my-0"><img src="/media/logo.png" width="200" class="d-block"></h2>
-            </div>
-            <div class="col text-white">
-                <ul class="list-inline list-unstyled my-0">
-                    <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
-                            <div class="text-center text-white">
-                                <div><i class="fas fa-briefcase fa-lg"></i></div>
-                                <!-- Update total quantity dynamically -->
-                                <p class="my-0">
-                                    {% if 'backpack_capacity' in request.session %}
-                                        {{ total_quantity }} / {{ request.session.backpack_capacity }}
-                                    {% else %}
-                                        {{ total_quantity }} / 100
-                                    {% endif %}
-                                </p>
-                                
-                            </div>
-                        </a>
-                        
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-center nav-link" href="{% url 'collectables' %}">
-                            <div class="text-center text-white">
-                                <i class="fas fa-screwdriver-wrench fa-lg"></i>
-                                <p class="my-0">Trade</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
+    </div>
+
+    <div id="delivery-banner" class="row text-center">
+        <div class="logo">
+            <h2 class="logo-font text-c my-0"><img src="/media/logo.png" width="200" class="d-block"></h2>
+        </div>
+        <div class="col text-white">
+            <ul class="list-inline list-unstyled my-0">
+                <li class="list-inline-item">
+                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'open_backpack' %}">
                         <div class="text-center text-white">
-                            <i class="fas fa-sack-dollar fa-lg"></i>
-                            <!-- Update player funds dynamically -->
-                            <p class="my-0">${{ request.session.player_funds }}</p>
-                        </div>
-                    </li>
-
-                    <li class="list-inline-item">
-                        <a class="text-center nav-link" href="{% url 'all_upgrades' %}"> <!-- Use the URL pattern name for the upgrades page -->
-                            <div class="text-center text-white">
-                                <i class="fas fa-rocket fa-lg"></i> <!-- Use an appropriate icon for upgrades -->
-                                <p class="my-0">Upgrades</p>
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center text-white">
-                                <div><i class="fas fa-gear fa-lg"></i></div>
-                                <p class="my-0">Account</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Item Management</a>
+                            <div><i class="fas fa-briefcase fa-lg"></i></div>
+                            <!-- Update total quantity dynamically -->
+                            <p class="my-0">
+                                {% if 'backpack_capacity' in request.session %}
+                                    {{ total_quantity }} / {{ request.session.backpack_capacity }}
+                                {% else %}
+                                    {{ total_quantity }} / 100
                                 {% endif %}
-                                <a href="" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                            {% endif %}
+                            </p>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="text-center nav-link" href="{% url 'collectables' %}">
+                        <div class="text-center text-white">
+                            <i class="fas fa-screwdriver-wrench fa-lg"></i>
+                            <p class="my-0">Trade</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <div class="text-center text-white">
+                        <i class="fas fa-sack-dollar fa-lg"></i>
+                        <!-- Update player funds dynamically -->
+                        <p class="my-0">${{ request.session.player_funds }}</p>
+                    </div>
+                </li>
+
+                <li class="list-inline-item">
+                    <a class="text-center nav-link" href="{% url 'all_upgrades' %}"> <!-- Use the URL pattern name for the upgrades page -->
+                        <div class="text-center text-white">
+                            <i class="fas fa-circle-up fa-lg"></i> <!-- Use an appropriate icon for upgrades -->
+                            <p class="my-0">Upgrades</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="list-inline-item dropdown">
+                    <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="text-center text-white">
+                            <div><i class="fas fa-gear fa-lg"></i></div>
+                            <p class="my-0">Account</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <a href="" class="dropdown-item">Item Management</a>
+                            {% endif %}
+                            <a href="" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                        {% else %}
+                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
         </div>
-    </header>
-    {% if messages %}
-        <div class="message-container"></div>
-    {% endif %}
+    </div>
+</header>
+{% if messages %}
+    <div class="message-container"></div>
+{% endif %}
 
-    {% block page_header %}
-    {% endblock %}
+{% block page_header %}
+{% endblock %}
 
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 
-    {% block postloadjs %}
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
- 
-    <script>
-        function reloadLighting() {
-            var viewers = document.getElementsByTagName('model-viewer');
-            if (viewers.length > 0) {
-                var viewer = viewers[0];
-                viewer.addEventListener('load', function() {
-                    var imgSrc = viewer.getAttribute('environment-image');
-                    var background = new Image();
-                    background.src = imgSrc;
-                    viewer.setAttribute('environment-image', imgSrc);
-                });
-            }
+{% block postloadjs %}
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
+<script>
+    function reloadLighting() {
+        var viewers = document.getElementsByTagName('model-viewer');
+        if (viewers.length > 0) {
+            var viewer = viewers[0];
+            viewer.addEventListener('load', function() {
+                var imgSrc = viewer.getAttribute('environment-image');
+                var background = new Image();
+                background.src = imgSrc;
+                viewer.setAttribute('environment-image', imgSrc);
+            });
         }
+    }
 
-        // Event Listeners
-        window.addEventListener('load', function() {
-            reloadLighting();
-        });
-    </script>
-    {% endblock %}
+    // Event Listeners
+    window.addEventListener('load', function() {
+        reloadLighting();
+    });
+
+    // Function to update player funds dynamically
+    function updatePlayerFunds(newFunds) {
+        var playerFundsElement = document.getElementById('player-funds');
+        if (playerFundsElement) {
+            playerFundsElement.innerText = '$' + newFunds.toFixed(2);
+        }
+    }
+</script>
+{% endblock %}
 </body>
 </html>
