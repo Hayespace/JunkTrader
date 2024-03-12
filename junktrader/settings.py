@@ -9,10 +9,12 @@ SECRET_KEY = 'django-insecure-5!7u_lrh$a!cgedxsu43+pt9m0kcp5&m&q$1v)w-!93fds%2xv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-hayespace-junktrader-cjwhvxxkbp3.ws-eu108.gitpod.io',
+    '8000-hayespace-junktrader-cjwhvxxkbp3.ws-eu110.gitpod.io',
     'localhost',
     '127.0.0.1',
 ]
+
+STRIPE_SECRET_KEY = 'sk_test_51OsmeYRwF6of2GXW3N9gqlhdDpt6LM63859cBjln9HFDud4ws3SJYcH9oGZiaghK0qioHl9wA6zVwn02xx6eI7Ep00p7bj4g7N'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
