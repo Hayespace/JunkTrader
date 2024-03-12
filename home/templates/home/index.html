@@ -39,22 +39,13 @@
                             </div>
                             <button type="submit" class="btn btn-red btn-lg mt-4">Play Game</button>
                         </form>
-
-                        {% for location in locations %}
-                        <li>
-                            <img src="{{ location.picture.url }}" alt="{{ location.name }}">
-                            <p>{{ location.name }}</p>
-                        </li>
-                    {% endfor %}
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-  
-
+    
     <script>
         function validateForm() {
             var radios = document.getElementsByName("difficulty");

@@ -10,7 +10,6 @@ body {
     font-family: 'Lato';
 }
 
-/* from Bulma */
 .icon {
     align-items: center;
     display: inline-flex;
@@ -40,7 +39,7 @@ body {
 
 .btn-outline-black {
     background: white;
-    color: black !important; /* use important to override link colors for <a> elements */
+    color: black !important;
     border: 1px solid black;
 }
 
@@ -91,21 +90,26 @@ body {
 }
 
 #delivery-banner {
-    border: 1px solid red; 
+    border: 1px solid red;
     background-color: #000000;
     margin-left: auto;
     margin-right: auto;
-    width: 90%; /* Adjust as needed */
-    max-width: 800px; /* Adjust as needed */
+    width: 90%;
+    max-width: 800px;
     border-radius: 50px;
-    padding: 10px 0; /* Add padding as needed */
+    padding: 10px 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-
-p, h1, h2, h3, h4, h5, h6{
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Amatic SC", sans-serif;
     font-weight: 700;
     font-size: x-large;
@@ -113,19 +117,18 @@ p, h1, h2, h3, h4, h5, h6{
 }
 
 .box {
-    border: 1px solid red; 
+    border: 1px solid red;
     box-shadow: 0 0 10px red;
     background-color: #00000093;
 }
 
-/* Default styles for the delivery banner */
 #delivery-banner {
-    border: 1px solid red; 
+    border: 1px solid red;
     background-color: #000000;
     border-radius: 50px;
-    padding: 10px 0; 
+    padding: 10px 0;
     display: flex;
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
 }
@@ -133,9 +136,8 @@ p, h1, h2, h3, h4, h5, h6{
 #delivery-banner .list-inline-item {
     flex: 1;
     max-width: 25%;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
 }
-
 
 .table-responsive {
     overflow-x: auto;
@@ -163,25 +165,20 @@ p, h1, h2, h3, h4, h5, h6{
     border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-
-
 .modal-content {
-    border: 1px solid red; 
+    border: 1px solid red;
     box-shadow: 0 0 10px red;
     background-color: #00000093;
 }
 
-
 .modal-header {
-    background-color: #ff0000; 
-    color: #ffffff; 
+    background-color: #ff0000;
+    color: #ffffff;
 }
-
 
 .modal-body {
-    padding: 20px; 
+    padding: 20px;
 }
-
 
 .modal-footer {
     background-color: #00000093;
@@ -190,7 +187,6 @@ p, h1, h2, h3, h4, h5, h6{
 
 .panel-top {
     margin-top: 200px;
-    
 }
 
 .fixed-panel {
@@ -198,45 +194,54 @@ p, h1, h2, h3, h4, h5, h6{
     top: 0;
     bottom: 0;
     left: 0;
-    width: 250px; /* Adjust the width as needed */
-    border: 1px solid red; 
+    width: 250px;
+    border: 1px solid red;
     box-shadow: 0 0 10px red;
     background-color: #00000093;
-    overflow-y: auto; /* Allow scrolling if content exceeds height */
+    overflow-y: auto;
 }
-
 
 .content-column {
-    padding-left: 5%; /* Adjust the padding to shift content away from the fixed panel */
+    padding-left: 5%;
 }
 
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+    padding: 10px;
+}
 
-/* Media query for smaller screens */
+.custom_toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
+
 @media (max-width: 767px) {
     #delivery-banner {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        z-index: 1000; /* Adjust as needed */
-        margin: 0; /* Remove margin */
-        border-radius: 0; /* Remove border radius */
+        z-index: 1000;
+        margin: 0;
+        border-radius: 0;
     }
 
     #delivery-banner .list-inline-item {
-        max-width: none; /* Remove max-width for items */
+        max-width: none;
     }
-    
 }
 
-
-/* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
-  .container {
-    max-width: 80%;
-  }
+    .container {
+        max-width: 80%;
+    }
 }
-
 
 @media (max-width: 767px) {
     .fixed-panel {
@@ -244,30 +249,30 @@ p, h1, h2, h3, h4, h5, h6{
         top: 0;
         left: 0;
         width: 100%;
-        height: 10%; /* Adjust the height as needed */
+        height: 10%;
         overflow-y: auto;
         z-index: 1000;
     }
-    
+
     .location-list {
         display: flex;
-        flex-direction: row; /* Change direction to horizontal for smaller screens */
-        flex-wrap: nowrap; /* Prevent wrapping of items */
-        justify-content: space-around; /* Adjust alignment as needed */
-        align-items: center; /* Adjust alignment as needed */
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
     }
-    
+
     .location-list li {
-        flex: 0 0 auto; /* Allow items to grow or shrink */
-        padding: 5px; /* Adjust padding as needed */
+        flex: 0 0 auto;
+        padding: 5px;
     }
-    
+
     .location-text {
-        display: none; /* Hide text on smaller screens */
+        display: none;
     }
-    
+
     h1 {
-        display: none; /* Hide the heading on smaller screens */
+        display: none;
     }
 
     .logo {
@@ -275,16 +280,6 @@ p, h1, h2, h3, h4, h5, h6{
     }
 }
 
-/*.message-container {
-    border: 1px solid red; 
-    box-shadow: 0 0 10px red;
-    background-color: #00000093;
-    color: white;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-/* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
@@ -307,14 +302,4 @@ p, h1, h2, h3, h4, h5, h6{
     body {
         height: calc(100vh - 116px);
     }
-}
-
-@media (max-width: 1300px) {
-    .fixed-panel {
-        border: none;
-        box-shadow: none;
-        background-color: #00000011;
-    }
-    
-
 }

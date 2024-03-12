@@ -90,7 +90,7 @@ def add_to_backpack(request, item_id):
     # Check if the player has enough funds
     total_cost = item_price * quantity
     if total_cost > Decimal(request.session['player_funds']):
-        messages.error(request, "Insufficient funds.")
+        messages.error(request, "You don't have enough funds to make this purchase.")
         return redirect('collectable_detail', collectable_id=item_id)
 
     if quantity > 0:
@@ -101,6 +101,9 @@ def add_to_backpack(request, item_id):
 
         # Update player funds
         request.session['player_funds'] = str(Decimal(request.session['player_funds']) - total_cost)
+        
+        # Add success message
+        messages.success(request, "Item added to backpack successfully.")
 
     request.session['backpack'] = backpack
 

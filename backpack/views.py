@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect, get_object_or_404
 from collectables.models import Collectable
 from django.contrib import messages
@@ -6,10 +5,12 @@ from decimal import Decimal
 
 def open_backpack(request):
     """A view that renders the backpack contents page"""
+    messages.get_messages(request)
     return render(request, 'backpack/backpack.html')
 
 def adjust_backpack(request, item_id):
     """Adjust the quantity of an item in the backpack"""
+    collectable = Collectable.objects.get(pk=item_id)
     quantity_str = request.POST.get('quantity')
     if not quantity_str:
         # Redirect to the previous page with an error message if quantity is not provided
@@ -37,6 +38,16 @@ def adjust_backpack(request, item_id):
             messages.error(request, "Adding this item would exceed the backpack capacity.")
             return redirect('open_backpack')
 
+    # Get the price of the item
+    item = get_object_or_404(Collectable, pk=item_id)
+    total_cost = item.price * quantity
+
+    # Check if the player has enough funds
+    if total_cost > Decimal(request.session.get('player_funds', 0)):
+        # Display an error message if the player does not have enough funds
+        messages.error(request, "You don't have enough funds to make this purchase.")
+        return redirect('open_backpack')
+
     if quantity > 0:
         # Update the quantity of the item in the backpack
         if item_id in backpack:
@@ -45,8 +56,7 @@ def adjust_backpack(request, item_id):
             backpack[item_id] = quantity
 
         # Update player funds
-        item = get_object_or_404(Collectable, pk=item_id)
-        request.session['player_funds'] = str(Decimal(request.session['player_funds']) - (item.price * quantity))
+        request.session['player_funds'] = str(Decimal(request.session['player_funds']) - total_cost)
 
     # Update the session with the modified backpack
     request.session['backpack'] = backpack
@@ -82,6 +92,9 @@ def sell_item(request, item_id):
             # Update player funds
             item = get_object_or_404(Collectable, pk=item_id)
             request.session['player_funds'] = str(Decimal(request.session['player_funds']) + (item.price * quantity_to_sell))
+            
+            # Add success message if the item was successfully sold
+            messages.success(request, "Item sold successfully.")
         else:
             # Display an error message if trying to sell more than available in the backpack
             messages.error(request, "Quantity to sell exceeds available quantity in backpack.")
