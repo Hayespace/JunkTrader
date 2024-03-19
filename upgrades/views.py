@@ -13,9 +13,14 @@ def upgrade_success(request, upgrade_id):
     # Retrieve the upgrade object based on the upgrade_id
     upgrade = Upgrade.objects.get(pk=upgrade_id)
     
-    # Render a template with a success message
+    # Update session data with the new capacity
+    request.session['backpack_capacity'] = upgrade.capacity
+    
+    # Add a success message
+    messages.success(request, f"Successfully purchased {upgrade.name}. Backpack capacity increased to {upgrade.capacity}.")
+    
+    # Redirect to the open_backpack page
     return redirect('open_backpack')
-
 
 def purchase_upgrade(request, upgrade_id):
     # Retrieve the upgrade object based on the upgrade_id
@@ -45,10 +50,8 @@ def purchase_upgrade(request, upgrade_id):
         # Redirect to the checkout session URL, which opens in a new window
         return redirect(session.url)
 
-    # Update session data with the new capacity
-    request.session['backpack_capacity'] = upgrade.capacity
-    
-    # Add a success message
-    messages.success(request, f"Successfully purchased {upgrade.name}. Backpack capacity increased to {upgrade.capacity}.")
-    
-    return redirect('open_backpack')
+    # Handle GET request (initial load or refresh)
+    # This part of the code was missing from the original implementation
+    # You need to handle the case where a user accesses the purchase_upgrade page directly without a POST request
+    # For example, if the user refreshes the page after submitting the form or if they access the URL directly
+    return redirect('all_upgrades')
