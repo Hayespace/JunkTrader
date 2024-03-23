@@ -50,9 +50,15 @@
                             <div class="row">
                                 <div class="col">
                                     <p class="lead mb-0 text-left font-weight-bold">${{ collectable.price }}</p>
+                                    {% if collectable.previous_price %}
+                                        <p class="lead mb-0 text-left font-weight-bold">
+                                            Previous Price: ${{ collectable.previous_price }}
+                                        </p>
+                                    {% endif %}
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
+                        
                     </div>
                 </div>
             {% endfor %}

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'backpack',
     'places',
     'upgrades',
+    'end_of_game',
     
 ]
 
@@ -67,7 +68,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'backpack.contexts.backpack_contents',
-                'backpack.contexts.total_amount',  # Add total_amount context processor here
+                'backpack.contexts.total_amount',  
                 'backpack.contexts.days_played',
             ],
         },

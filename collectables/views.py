@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.views.decorators.cache import never_cache
 from .models import Collectable
 from django.contrib import messages
 from decimal import Decimal
@@ -17,7 +16,21 @@ def increment_days_played(request):
         
         # Limit the days played count to a maximum of 30
         days_played = min(days_played, 30)
-        
+
+        print("Days played:", days_played)  
+
+        # Display special messages at certain days
+        if days_played == 25:
+            messages.warning(request, "You have 5 days of trading left.")
+        elif days_played == 29:
+            messages.warning(request, "This is your last day of trading. Make it count!")
+        elif days_played == 3:
+            print("Redirecting to end of game...") 
+            # Clear session data
+            request.session.clear()
+            # Redirect to the end of the game view
+            return redirect('end_of_game')
+
         # Update the days played count in the session
         request.session['days_played'] = days_played
         
@@ -27,13 +40,23 @@ def increment_days_played(request):
         # Return an error response if an exception occurs
         return JsonResponse({'error': str(e)}, status=500)
 
-@never_cache
+
 def update_collectable_prices(request):
     try:
         collectables = Collectable.objects.all()
         for collectable in collectables:
-            collectable.price = random.randint(50, 10000)
+            # Generate a new random price
+            new_price = random.randint(50, 10000)
+            # Store the previous price
+            collectable.previous_price = collectable.price
+            
+            # Update the price of the collectable
+            collectable.price = new_price
             collectable.save()
+
+        # Pass the collectables to the template
+        context = {'collectables': collectables}
+        
         response_data = {'success': True}
         response = JsonResponse(response_data)
         response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -43,6 +66,7 @@ def update_collectable_prices(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
+        
 def all_collectables(request):
     collectables = Collectable.objects.all()
     context = {
@@ -71,6 +95,9 @@ def add_to_backpack(request, item_id):
 
     backpack = request.session.get('backpack', {})
     
+    # Ensure 'player_funds' is set in the session with a default value if it's not found
+    player_funds = request.session.get('player_funds', 0)
+
     # Get the total items currently in the backpack
     total_items_in_backpack = sum(backpack.values())
     
@@ -89,7 +116,7 @@ def add_to_backpack(request, item_id):
 
     # Check if the player has enough funds
     total_cost = item_price * quantity
-    if total_cost > Decimal(request.session['player_funds']):
+    if total_cost > Decimal(player_funds):
         messages.error(request, "You don't have enough funds to make this purchase.")
         return redirect('collectable_detail', collectable_id=item_id)
 
@@ -100,7 +127,7 @@ def add_to_backpack(request, item_id):
             backpack[item_id] = quantity
 
         # Update player funds
-        request.session['player_funds'] = str(Decimal(request.session['player_funds']) - total_cost)
+        request.session['player_funds'] = str(Decimal(player_funds) - total_cost)
         
         # Add success message
         messages.success(request, "Item added to backpack successfully.")
@@ -108,6 +135,7 @@ def add_to_backpack(request, item_id):
     request.session['backpack'] = backpack
 
     return redirect(redirect_url)
+
 
 
 def sell_item(request, item_id):

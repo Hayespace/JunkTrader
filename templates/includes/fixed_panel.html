@@ -44,10 +44,13 @@
             success: function(response) {
                 // Update the days played count in the HTML
                 var daysPlayedElement = document.getElementById('days-played');
-                var daysPlayed = parseInt(daysPlayedElement.innerText);
+                var daysText = daysPlayedElement.innerText
+                var days = daysText.split("/")[0]
+                var daysPlayed = parseInt(days);
                 daysPlayed += 1;
-                daysPlayed = Math.min(daysPlayed, 30);
-                daysPlayedElement.innerText = daysPlayed;
+                if (daysPlayed > 2) {
+                    window.location.href = "{% url 'end_of_game' %}"
+                }
             },
             error: function(err) {
                 // Handle error if necessary

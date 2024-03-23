@@ -12,5 +12,6 @@ urlpatterns = [
     path('backpack/', include('backpack.urls')),
     path('places/', include('places.urls')),
     path('upgrades/', include('upgrades.urls')),
+    path('end_of_game/', include('end_of_game.urls')),
     path('reset-session/', reset_session, name='reset_session'),  # Add the URL pattern for reset_session
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
