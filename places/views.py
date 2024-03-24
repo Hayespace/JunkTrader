@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.views.decorators.cache import never_cache  # Import never_cache decorator
+from django.views.decorators.cache import never_cache 
 from collectables.models import Collectable
 import random
 
