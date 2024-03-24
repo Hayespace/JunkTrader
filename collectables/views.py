@@ -24,12 +24,13 @@ def increment_days_played(request):
             messages.warning(request, "You have 5 days of trading left.")
         elif days_played == 29:
             messages.warning(request, "This is your last day of trading. Make it count!")
-        elif days_played == 30:
+        elif days_played == 3:
             print("Redirecting to end of game...") 
             # Clear session data
             request.session.clear()
             # Redirect to the end of the game view
             return redirect('end_of_game')
+        
 
         # Update the days played count in the session
         request.session['days_played'] = days_played

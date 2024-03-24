@@ -1,51 +1,26 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>End of Game</title>
-    <!-- Link to project CSS file -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
-<body>
-    <header class="container-fluid fixed-top">
-        <!-- Header content from base template -->
-    </header>
-
-    <div class="container-fluid">
+{% block page_header %}
+    <div class="container header-container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <h1 class="text-white">End of Game</h1>
-                    <p class="text-white">Congratulations! You've reached the end of the game.</p>
-                    <p class="text-white">Your final score is: {{ final_score }}</p>
-                    <!-- Form for player to submit score and username -->
-                    <form action="#" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="username" class="text-white">Username:</label>
-                            <input type="text" id="username" name="username" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="score" class="text-white">Score:</label>
-                            <input type="number" id="score" name="score" value="{{ final_score }}" class="form-control" readonly>
-                        </div>
-                        <button type="submit" class="btn btn-red">Submit Score</button>
-                    </form>
-                    <hr>
-                    <!-- Link to return to home page -->
-                    <form action="{% url 'home' %}" method="get">
-                        <button class="btn btn-outline-black" type="submit">Return to Home Page</button>
-                    </form>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-8">
+                <div class="content-box p-5 text-center">
+                    <h1 class="display-4 logo-font mb-4 text-white">
+                        End of Game
+                    </h1>
+                    <p class="lead text-white">Congratulations {{ user.username }}! You've reached the end of the game.</p>
+                    <p class="lead text-white">Your final score is: {{ final_score }}</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer content from base template -->
-
-    <!-- JavaScript imports and scripts from base template -->
-</body>
-</html>
+{% endblock %}

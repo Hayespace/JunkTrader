@@ -1,0 +1,1 @@
+web: gunicorn junktrader.wsgi:application
