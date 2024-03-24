@@ -10,9 +10,11 @@ SECRET_KEY = 'u%lb=n69r(0ikjy_14xhdx_x!wwc+uydfz%bl0&h$x=!8*i7$*'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'junktrader.herokuapp.com', 
-    'localhost'
+    'junktrader.herokuapp.com',
+    'junktrader-d1896583f35f.herokuapp.com',  # Add this line
+    'localhost',
 ]
+
 
 STRIPE_SECRET_KEY = 'sk_test_51OsmeYRwF6of2GXW3N9gqlhdDpt6LM63859cBjln9HFDud4ws3SJYcH9oGZiaghK0qioHl9wA6zVwn02xx6eI7Ep00p7bj4g7N'
 
