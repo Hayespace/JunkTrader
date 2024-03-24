@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Profile</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="username" class="col-md-4 col-form-label text-md-right">Username:{{ profile }}</label>
+                        <div class="col-md-6">
+                            <p class="form-control">{{ user.username }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">Email Address:</label>
+                        <div class="col-md-6">
+                            <p class="form-control">{{ user.email }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">Scores:</label>
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                {% for score in scores %}
+                                    <li class="list-group-item">{{ score }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

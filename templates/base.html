@@ -27,19 +27,47 @@
 <header class="container-fluid fixed-top">
     <div id="topnav" class="row pt-lg-2 d-none d-lg-flex justify-content-center mt-4">
         <div class="col-lg-12">
-            
         </div>
     </div>
+
+    <div class="list-inline-item dropdown">
+        <a class="text-black nav-link dropdown-toggle" href="#" id="user-options" role="button">
+            <div class="text-center text-white">
+                <i class="fa-solid fa-bars fa-lg"></i>
+            </div>
+        </a>
+        <div class="dropdown-menu border-0" aria-labelledby="user-options">
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a href="#" class="dropdown-item">Item Management</a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+            {% else %}
+                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+            {% endif %}
+            
+        </div>
+    </div>  
 
     <div id="delivery-banner" class="row text-center">
         <div class="logo">
             <h2 class="logo-font text-c my-0"><img src="/media/logo.png" width="200" class="d-block"></h2>
         </div>
-        <div class="col text-white">
+        <div class="col">
             <ul class="list-inline list-unstyled my-0">
                 <li class="list-inline-item">
-                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'open_backpack' %}">
-                        <div class="text-center text-white">
+                    <div class="text-center text-white">
+                        <i class="fas fa-sack-dollar fa-lg"></i>
+                        <!-- Update player funds dynamically -->
+                        <p class="my-0">${{ request.session.player_funds }}</p>
+                    </div>
+                </li>
+
+                <li class="list-inline-item">
+                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}{% endif %} nav-link link-hover" href="{% url 'open_backpack' %}">
+                        <div class="text-center list-text">
                             <div><i class="fas fa-briefcase fa-lg"></i></div>
                             <!-- Update total quantity dynamically -->
                             <p class="my-0">
@@ -53,56 +81,28 @@
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="text-center nav-link" href="{% url 'collectables' %}">
-                        <div class="text-center text-white">
+                    <a class="text-center nav-link link-hover" href="{% url 'collectables' %}">
+                        <div class="text-center list-text">
                             <i class="fas fa-screwdriver-wrench fa-lg"></i>
                             <p class="my-0">Trade</p>
                         </div>
                     </a>
                 </li>
+                
                 <li class="list-inline-item">
-                    <div class="text-center text-white">
-                        <i class="fas fa-sack-dollar fa-lg"></i>
-                        <!-- Update player funds dynamically -->
-                        <p class="my-0">${{ request.session.player_funds }}</p>
-                    </div>
-                </li>
-
-                <li class="list-inline-item">
-                    <a class="text-center nav-link" href="{% url 'all_upgrades' %}"> <!-- Use the URL pattern name for the upgrades page -->
-                        <div class="text-center text-white">
-                            <i class="fas fa-circle-up fa-lg"></i> <!-- Use an appropriate icon for upgrades -->
+                    <a class="text-center nav-link link-hover" href="{% url 'all_upgrades' %}"> 
+                        <div class="text-center list-text">
+                            <i class="fas fa-circle-up fa-lg"></i> 
                             <p class="my-0">Upgrades</p>
                         </div>
                     </a>
                 </li>
-
+               
                 <li class="list-inline-item">
                     <div class="text-center text-white">
                         <i class="fas fa-clock fa-lg"></i>
                         <!-- Display the number of days played dynamically -->
-                        <p class="my-0" id="days-played">{{ days_played }} / 30</p>
-                    </div>
-                </li>
-
-                <li class="list-inline-item dropdown">
-                    <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center text-white">
-                            <div><i class="fas fa-gear fa-lg"></i></div>
-                            <p class="my-0">Account</p>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                                <a href="" class="dropdown-item">Item Management</a>
-                            {% endif %}
-                            <a href="" class="dropdown-item">My Profile</a>
-                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                        {% else %}
-                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                        {% endif %}
+                        <p class="my-0">{{ days_played }} / 30</p>
                     </div>
                 </li>
             </ul>
@@ -136,6 +136,20 @@
 
 {% block postloadjs %}
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
+<script>
+    // dropdown menu
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".dropdown-toggle").addEventListener("click", function() {
+            this.parentNode.querySelector(".dropdown-menu").classList.toggle("show");
+        });
+        document.querySelectorAll(".dropdown-item").forEach(function(item) {
+            item.addEventListener("click", function() {
+                this.closest(".dropdown-menu").classList.remove("show");
+            });
+        });
+    });
+</script>
 
 <script>
      // GLB viewer lighting

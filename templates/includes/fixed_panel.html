@@ -48,12 +48,12 @@
                 var days = daysText.split("/")[0]
                 var daysPlayed = parseInt(days);
                 daysPlayed += 1;
-                if (daysPlayed > 2) {
+                if (daysPlayed > 3) {
                     window.location.href = "{% url 'end_of_game' %}"
                 }
             },
             error: function(err) {
-                // Handle error if necessary
+                
             }
         });
     }

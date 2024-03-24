@@ -1,50 +1,70 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block head_title %}
-            {% endblock head_title %}
-        </title>
-        {% block extra_head %}
-        {% endblock extra_head %}
-    </head>
-    <body>
-        {% block body %}
-            {% if messages %}
-                <div>
-                    <strong>{% trans "Messages:" %}</strong>
-                    <ul>
-                        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-                    </ul>
-                </div>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block head_title %}
+        {% endblock head_title %}
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Sono:wght@200..800&display=swap" rel="stylesheet">
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+    
+    <style>
+     
+    </style>
+</head>
+<body>
+{% block body %}
+<div class="container">
+    {% if messages %}
+    <div class="alert alert-info">
+        <strong>{% trans "Messages:" %}</strong>
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="menu">
+        <strong>{% trans "Menu:" %}</strong>
+        <ul class="list-unstyled">
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'account_email' %}" class="nav-link">{% trans "Change Email" %}</a>
+            </li>
+            <li>
+                <a href="{% url 'account_logout' %}" class="nav-link">{% trans "Sign Out" %}</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'account_login' %}" class="nav-link">{% trans "Sign In" %}</a>
+            </li>
+            <li>
+                <a href="{% url 'account_signup' %}" class="nav-link">{% trans "Sign Up" %}</a>
+            </li>
             {% endif %}
-            <div>
-                <strong>{% trans "Menu:" %}</strong>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'account_email' %}">{% trans "Change Email" %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-            {% block content %}
-            {% endblock content %}
-        {% endblock body %}
-        {% block extra_body %}
-        {% endblock extra_body %}
-    </body>
+        </ul>
+    </div>
+    <div class="content-box2"> 
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <div class="text-center">
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">{% trans "Return to Game" %}</a>
+    </div>
+</div>
+{% endblock body %}
+{% block extra_body %}
+{% endblock extra_body %}
+</body>
 </html>

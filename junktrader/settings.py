@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'backpack',
     'places',
     'upgrades',
+    'profiles',
     'end_of_game',
     
 ]

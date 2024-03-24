@@ -75,6 +75,15 @@ body {
     z-index: -1;
 }
 
+.list-text {
+    color: white;
+}
+
+
+.list-text:hover {
+    color: rgb(59, 59, 144);
+}
+
 .btt-link,
 .update-link,
 .remove-item {
@@ -227,6 +236,29 @@ h6 {
 
 .text-red {
     color: red;
+}
+
+   /* Center content box */
+.content-box2 {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    align-items: center;
+    color: white;
+    border-color: red;
+    background-color: rgba(0, 0, 0, 0.601);
+    text-align: right;
+}
+
+
+.content-box2 input[type="text"],
+.content-box2 input[type="email"],
+.content-box2 input[type="password"],
+.content-box2 textarea {
+    background-color: transparent;
+    border: 1px solid #ccc; 
+    color: white; 
 }
 
 
