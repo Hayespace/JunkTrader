@@ -19,7 +19,11 @@ body {
 }
 
 .logo {
-    margin-left: 2%;
+    background-image: url('/media/logo.png');
+    width: 200px; 
+    height: auto; 
+    display: block;
+    margin: 0 auto; 
 }
 
 .main-logo-link {
