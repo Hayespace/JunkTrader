@@ -18,9 +18,11 @@
                         Welcome to JUNK TRADER
                     </h1>
                     <div class="my-5">
+                        {% if request.user.is_authenticated %}
                         <h4 class="mb-4 text-white">
                             Choose Difficulty:
                         </h4>
+                        
                         <form id="gameForm" method="post" action="{% url 'start_game' %}" onsubmit="return validateForm()">
                             {% csrf_token %}
                             <div class="form-row justify-content-center">
@@ -39,13 +41,16 @@
                             </div>
                             <button type="submit" class="btn btn-red btn-lg mt-4">Play Game</button>
                         </form>
+                        {% else %}
+                        <p class="text-white">Please <a href="{% url 'account_login' %}">Login</a> to start the game.</p>
+                        
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    
     <script>
         function validateForm() {
             var radios = document.getElementsByName("difficulty");

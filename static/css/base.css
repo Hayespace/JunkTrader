@@ -18,6 +18,9 @@ body {
     width: 1.5rem;
 }
 
+.logo {
+    margin-left: 15px;
+}
 
 .main-logo-link {
     width: fit-content;

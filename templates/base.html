@@ -40,21 +40,20 @@
             {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
             <a href="{% url 'admin:index' %}" class="dropdown-item">Admin Panel</a>
-        {% endif %}
-        
-                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-            {% else %}
-                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
             {% endif %}
             
+            <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+            {% else %}
+            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+            {% endif %}
         </div>
     </div>  
 
     <div id="delivery-banner" class="row text-center">
         <div class="logo">
-            <img height="200px" src="https://junktrader.s3.eu-central-1.amazonaws.com/media/logo.png" alt="Junk Trader Logo">
+            <img width="300" src="https://junktrader.s3.eu-central-1.amazonaws.com/media/logo.png" alt="Junk Trader Logo">
         </div>
         
         <div class="col">
@@ -68,6 +67,7 @@
                 </li>
 
                 <li class="list-inline-item">
+                    {% if request.user.is_authenticated %}
                     <a class="{% if grand_total %}text-info font-weight-bold{% else %}{% endif %} nav-link link-hover" href="{% url 'open_backpack' %}">
                         <div class="text-center list-text">
                             <div><i class="fas fa-briefcase fa-lg"></i></div>
@@ -81,23 +81,28 @@
                             </p>
                         </div>
                     </a>
+                    {% endif %}
                 </li>
                 <li class="list-inline-item">
+                    {% if request.user.is_authenticated %}
                     <a class="text-center nav-link link-hover" href="{% url 'collectables' %}">
                         <div class="text-center list-text">
                             <i class="fas fa-screwdriver-wrench fa-lg"></i>
                             <p class="my-0">Trade</p>
                         </div>
                     </a>
+                    {% endif %}
                 </li>
                 
                 <li class="list-inline-item">
+                    {% if request.user.is_authenticated %}
                     <a class="text-center nav-link link-hover" href="{% url 'all_upgrades' %}"> 
                         <div class="text-center list-text">
                             <i class="fas fa-circle-up fa-lg"></i> 
                             <p class="my-0">Upgrades</p>
                         </div>
                     </a>
+                    {% endif %}
                 </li>
                
                 <li class="list-inline-item">

@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,9 +62,11 @@
     <div class="text-center">
         <a href="{% url 'home' %}" class="btn btn-primary mt-3">{% trans "Return to Game" %}</a>
     </div>
+    {% if request.user.is_authenticated %}
     <div class="text-center">
         <a href="{% url 'profile' %}" class="btn btn-secondary mt-3">{% trans "Return to Profile" %}</a>
     </div>
+    {% endif %}
 </div>
 {% endblock body %}
 {% block extra_body %}
