@@ -6,7 +6,7 @@ function updatePrices() {
         console.log(daysPlayedElement)
         var daysText = daysPlayedElement.innerText;
         var days = parseInt(daysText.split("/")[0]);
-        if (days > 29) {
+        if (days > 3) {
            return;
         }
         // Request to update collectable prices for all items
@@ -35,7 +35,7 @@ function updatePrices() {
             var days = daysText.split("/")[0];
             var daysPlayed = parseInt(days);
             daysPlayed += 1;
-             if (daysPlayed > 29) {
+             if (daysPlayed > 3) {
                  window.location.href = "{% url 'end_of_game' %}";
              }
         },

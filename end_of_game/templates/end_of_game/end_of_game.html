@@ -19,6 +19,13 @@
                     </h1>
                     <p class="lead text-white">Congratulations {{ user.username }}! You've reached the end of the game.</p>
                     <p class="lead text-white display-4">Your final score is: {{ final_score }}</p>
+                    
+                    <!-- Add form to submit score -->
+                    <form method="post" action="{% url 'submit_score' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="score" value="{{ final_score }}" readonly>
+                        <button type="submit" class="btn btn-primary">Submit Score</button>
+                    </form>
                 </div>
             </div>
         </div>

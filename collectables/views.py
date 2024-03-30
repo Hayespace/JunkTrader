@@ -24,7 +24,7 @@ def increment_days_played(request):
             messages.warning(request, "You have 5 days of trading left.")
         elif days_played == 29:
             messages.warning(request, "This is your last day of trading. Make it count!")
-        elif days_played > 29:
+        elif days_played > 3:
             print("Redirecting to end of game...") 
             # Redirect to the end of the game view
             return redirect(reverse('end_of_game'))
