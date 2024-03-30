@@ -1,6 +1,14 @@
 <!-- fixed_panel.html -->
 <script>
-    function updatePrices() {
+
+function updatePrices() {
+        var daysPlayedElement = document.getElementById('days-played');
+        console.log(daysPlayedElement)
+        var daysText = daysPlayedElement.innerText;
+        var days = parseInt(daysText.split("/")[0]);
+        if (days > 29) {
+           return;
+        }
         // Request to update collectable prices for all items
         $.ajax({
             url: "{% url 'update_collectable_prices' %}",
@@ -10,57 +18,56 @@
                 window.location.href = "{% url 'collectables' %}";
             },
             error: function(err) {
-                // Handle error if necessary
             }
         });
-    }
-    
-    function exitGame() {
-        // Perform actions to exit the game
-        var confirmExit = confirm("Are you sure you want to quit?");
-        
-        // If the user confirms, proceed with exiting the game
-        if (confirmExit) {
-            // Clear session data for player funds and items from the backpack
-            $.ajax({
-                url: "{% url 'reset_session' %}",
-                type: "GET",
-                success: function(response) {
-                    window.location.href = "{% url 'home' %}";
-                },
-                error: function(err) {
-                    window.location.href = "{% url 'home' %}"; // Redirect to home page even if there's an error
-                }
-            });
-        }
     }
 
-    // Function to increment the days played count
     function incrementDaysPlayed() {
-        // Request to increment the days played count
-        $.ajax({
-            url: "{% url 'increment_days_played' %}",
-            type: "GET",
-            success: function(response) {
-                // Update the days played count in the HTML
-                var daysPlayedElement = document.getElementById('days-played');
-                var daysText = daysPlayedElement.innerText
-                var days = daysText.split("/")[0]
-                var daysPlayed = parseInt(days);
-                daysPlayed += 1;
-                if (daysPlayed > 3) {
-                    window.location.href = "{% url 'end_of_game' %}"
-                }
-            },
-            error: function(err) {
-                
+        console.log('increment js function running');
+    $.ajax({
+        url: "{% url 'increment_days_played' %}",
+        type: "GET",
+        success: function(response) {
+            console.log('successful increment')
+            // Update the days played count in the HTML
+            var daysPlayedElement = document.getElementById('days-played');
+            var daysText = daysPlayedElement.innerText;
+            var days = daysText.split("/")[0];
+            var daysPlayed = parseInt(days);
+            daysPlayed += 1;
+             if (daysPlayed > 29) {
+                 window.location.href = "{% url 'end_of_game' %}";
+             }
+        },
+        error: function(err) {
+            console.log('an error occurred')
+        }
+    });
+}
+    function exitGame() {
+            // Perform actions to exit the game
+            var confirmExit = confirm("Are you sure you want to quit?");
+            
+            // If the user confirms, proceed with exiting the game
+            if (confirmExit) {
+                // Clear session data for player funds and items from the backpack
+                $.ajax({
+                    url: "{% url 'reset_session' %}",
+                    type: "GET",
+                    success: function(response) {
+                        window.location.href = "{% url 'home' %}";
+                    },
+                    error: function(err) {
+                        window.location.href = "{% url 'home' %}"; 
+                    }
+                });
             }
-        });
-    }
+        }
+
 </script>
 
 <div class="fixed-panel">
-    <h1 class="text-white text-center mt-5 p-4">Travel</h1>
+    <h1 class="text-white text-center mt-5 p-4 display-4">Travel</h1>
     <ul class="location-list text-left p-4 list-unstyled">
         <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-industry fa-xl"></i><span class="location-text"> <p>Abandoned Factory</p></span></a></li>
         <li><a href="#" onclick="updatePrices(); incrementDaysPlayed();"><i class="fas fa-xmarks-lines fa-lg"></i><span class="location-text"> <p>The Outlands</p></span></a></li>

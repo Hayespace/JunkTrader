@@ -17,15 +17,15 @@
                 <div class="card-header text-white"><p>Profile</p></div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="username" class="col-md-4 col-form-label text-md-right text-white"><p>Username:</p></label>
+                        <label for="username" class="col-md-4 text-md-right text-white"><p>Username:</p></label>
                         <div class="col-md-6">
-                            <p class="form-control">{{ user.username }}</p>
+                            <p>{{ user.username }}</p>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right text-white"><p>Email Address:</p></label>
+                        <label for="email" class="col-md-4 text-md-right text-white"><p>Email Address:</p></label>
                         <div class="col-md-6">
-                            <p class="form-control">{{ user.email }}</p>
+                            <p>{{ user.email }}</p>
                         </div>
                         <div class="col-md-2">
                             <a href="{% url 'account_email' %}" class="btn btn-primary">Change Email</a>
@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                             <ul class="list-group">
                                 {% for score in scores %}
-                                    <li class="list-group-item">{{ score }}</li>
+                                    <li class="list-group-item">{{ final_score }}</li>
                                 {% endfor %}
                             </ul>
                         </div>

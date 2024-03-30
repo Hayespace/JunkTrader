@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import JsonResponse
 from .models import Collectable
 from django.contrib import messages
@@ -13,7 +13,7 @@ def increment_days_played(request):
         
         # Increment the days played count by 1
         days_played += 1
-        
+
         # Limit the days played count to a maximum of 30
         days_played = min(days_played, 30)
 
@@ -24,14 +24,11 @@ def increment_days_played(request):
             messages.warning(request, "You have 5 days of trading left.")
         elif days_played == 29:
             messages.warning(request, "This is your last day of trading. Make it count!")
-        elif days_played == 3:
+        elif days_played > 29:
             print("Redirecting to end of game...") 
-            # Clear session data
-            request.session.clear()
             # Redirect to the end of the game view
-            return redirect('end_of_game')
+            return redirect(reverse('end_of_game'))
         
-
         # Update the days played count in the session
         request.session['days_played'] = days_played
         
@@ -40,7 +37,6 @@ def increment_days_played(request):
     except Exception as e:
         # Return an error response if an exception occurs
         return JsonResponse({'error': str(e)}, status=500)
-
 
 def update_collectable_prices(request):
     try:
