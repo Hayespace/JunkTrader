@@ -18,13 +18,6 @@ body {
     width: 1.5rem;
 }
 
-.logo {
-    background-image: url('/media/logo.png');
-    width: 200px; 
-    height: auto; 
-    display: block;
-    margin: 0 auto; 
-}
 
 .main-logo-link {
     width: fit-content;
