@@ -131,6 +131,18 @@ h6 {
     background-color: #00000093;
 }
 
+.box-upgrades {
+    border: 1px solid rgb(255, 255, 0);
+    box-shadow: 0 0 10px rgb(255, 255, 0);
+    background-color: #00000093;
+}
+
+.box-profile {
+    border: 1px solid rgb(3, 160, 14);
+    box-shadow: 0 0 10px rgb(3, 160, 14);
+    background-color: #00000093;
+}
+
 #delivery-banner {
     border: 1px solid red;
     background-color: #000000;
