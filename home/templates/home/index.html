@@ -45,22 +45,39 @@
                         <p class="text-white">Please <a href="{% url 'account_login' %}">Login</a> to start the game.</p>
                         {% endif %}
                     </div>
-                    <div class="box text-white text-left">
-                        <h1 class="ml-1">How to Play</h1>
-                        <p>
-                            <ol>
-                                <li>Start with Funds: Begin the game with a set amount of funds in your virtual wallet.</li>
-                                <li>Explore Markets: Navigate through virtual markets filled with a variety of collectables waiting to be discovered.</li>
-                                <li>Buy and Sell: Use your funds to buy collectables when prices are low and sell them when prices are high to make a profit.</li>
-                                <li>Watch Trends: Keep an eye on market trends and fluctuations in item prices to make strategic decisions.</li>
-                                <li>Manage Backpack: Be mindful of your backpack capacity – you can only carry a limited number of items at a time.</li>
-                                <li>Maximize Profits: Make shrewd investments and take calculated risks to build your collection and increase your wealth.</li>
-                                <li>Race Against Time: Time is limited, with each passing day bringing new challenges and opportunities.</li>
-                                <li>Achieve Victory: Rise through the ranks of collectors and emerge victorious by amassing the most wealth before the game ends.</li>
-                            </ol>
-                        </p>
-                    </div>
-                    
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#howToPlayModal">
+                        How to Play
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="howToPlayModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="howToPlayModalLabel">How to Play</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-white">
+                    <ol>
+                        <li>Start with Funds: Begin the game with a set amount of funds in your virtual wallet.</li>
+                        <li>Explore Markets: Navigate through virtual markets filled with a variety of collectables waiting to be discovered.</li>
+                        <li>Buy and Sell: Use your funds to buy collectables when prices are low and sell them when prices are high to make a profit.</li>
+                        <li>Watch Trends: Keep an eye on market trends and fluctuations in item prices to make strategic decisions.</li>
+                        <li>Manage Backpack: Be mindful of your backpack capacity – you can only carry a limited number of items at a time.</li>
+                        <li>Maximize Profits: Make shrewd investments and take calculated risks to build your collection and increase your wealth.</li>
+                        <li>Race Against Time: Time is limited, with each passing day bringing new challenges and opportunities.</li>
+                        <li>Achieve Victory: Rise through the ranks of collectors and emerge victorious by amassing the most wealth before the game ends.</li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
