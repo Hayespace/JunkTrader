@@ -5,8 +5,8 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    scores = models.IntegerField(default=0)  # Add scores field
-    date = models.DateField(auto_now_add=True)  # Add date field
+    scores = models.IntegerField(default=0)  
+    date = models.DateField(auto_now_add=True)  
 
     def __str__(self):
         return self.user.username
@@ -18,5 +18,10 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     if created:
         UserProfile.objects.create(user=instance)
-    # Existing users: just save the profile
-    instance.userprofile.save()
+    else:
+        # Existing users: just save the profile
+        if hasattr(instance, 'userprofile'):
+            instance.userprofile.save()
+        else:
+            # If UserProfile doesn't exist, create it
+            UserProfile.objects.create(user=instance)
