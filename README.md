@@ -1,4 +1,4 @@
-# JUNK TRADER: An eCommerce Trading Game
+# JUNK TRADER: A Post-Apocalyptic eCommerce Trading Game
 
 ![responsiveness](/media/readme_images/responsive.png)
 ![responsiveness](/media/readme_images/mobile_bp.png)
