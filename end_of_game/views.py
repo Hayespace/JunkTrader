@@ -9,7 +9,7 @@ def end_of_game(request):
     final_score = request.session.get('player_funds', 0)
     return render(request, 'end_of_game/end_of_game.html', {'final_score': final_score})
 
-@login_required
+
 def submit_score(request):
     if request.method == 'POST':
         submitted_score = request.POST.get('score')
