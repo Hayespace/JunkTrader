@@ -9,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = ('wle4uk22x0sk5h$t1=njtb20j!2#a_!2^w@mr24$2+69x+!!%b')
 
-DEBUG = 'DEVELOPMENT' in os.environ
+#DEBUG = 'DEVELOPMENT' in os.environ
 
-#DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'junktrader.herokuapp.com',
