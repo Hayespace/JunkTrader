@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    scores = models.IntegerField(default=0)  
+    #scores = models.IntegerField(default=0)  
     date = models.DateField(auto_now_add=True)  
 
     def __str__(self):

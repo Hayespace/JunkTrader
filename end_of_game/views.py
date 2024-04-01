@@ -10,6 +10,7 @@ def end_of_game(request):
     return render(request, 'end_of_game/end_of_game.html', {'final_score': final_score})
 
 
+@login_required
 def submit_score(request):
     if request.method == 'POST':
         submitted_score = request.POST.get('score')
@@ -25,11 +26,14 @@ def submit_score(request):
         
         # If the profile already exists, update the score and date
         if not created:
-            profile.scores = score_int
-            profile.date = datetime.now()
-        else:
+            # Add the new score to the existing total score
             profile.scores += score_int
-            profile.date = datetime.now()
+        else:
+            # Create a new profile with the submitted score
+            profile.scores = score_int
+        
+        # Update the date
+        profile.date = datetime.now()
         
         profile.save()
         
@@ -37,4 +41,3 @@ def submit_score(request):
         return redirect('profile')
     else:
         return redirect('error_page')
-
