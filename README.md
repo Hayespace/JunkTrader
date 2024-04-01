@@ -224,10 +224,12 @@ While the basic elements for a trading game are in place, there is much room for
 - **Legal Troubles**: Including legal troubles such as lawsuits or fines could introduce additional challenges and consequences for players' actions.
 
 ## Wireframe
-Original Concept designed on https://lucid.app/lucidchart/715afd59-92e4-46b0-8a30-d91f3ab52811/edit?view_items=-Lors2m-M-WZ&invitationId=inv_d731e78f-3b66-4940-b1f8-5e72a4a73789
+Original Concept designed on lucid 
 
-![Junk Trader Wireframes](/static/assets/landing_wf.png)
-![Junk Trader Wireframes](/static/assets/profile_wf.png)
+![Junk Trader Wireframes](/media/readme_images/wireframe1.jpeg)
+![Junk Trader Wireframes](/media/readme_images/wireframe2.jpeg)
+![Junk Trader Wireframes](/media/readme_images/wireframe3.jpeg)
+![Junk Trader Wireframes](/media/readme_images/wireframe4.jpeg)
 
 ## Technologies Used
 JUNKTRADER leverages a range of technologies to ensure a seamless user experience:
@@ -264,24 +266,6 @@ Here's how Junk Trader fulfills the expectations of its users:
 Testing Junk Trader against these user stories ensures that the platform delivers on its promises and provides a user-friendly and captivating experience for all its players.
 
 
-### Validator Testing
-
-#### HTML
-- **Issue:** The validator cannot interpret the Jinja templating, but other than that, the code passes.
-  ![HTML Validator](/static/assets/htmlval1.png)
-  ![HTML Validator](/static/assets/htmlval2.png)
-
-#### CSS
-- **Result:** No errors found.
-  ![CSS Validator](/static/assets/cssval.png)
-
-#### Python
-- **Result:** No errors found.
-  ![Python Validator](/static/assets/pythonval.png)
-
-#### JavaScript
-- **Result:** No errors found.
-
 ### Automated vs Manual Testing
 
 In testing Junk Trader, a combination of automated and manual testing approaches was employed, each serving specific purposes depending on the nature of the testing required.
@@ -303,11 +287,11 @@ A straightforward test was created to ensure the home app to make sure it is wor
 
 In this test:
 
-We import TestCase from django.test for creating a test case.
-We import reverse from django.urls to generate the URL for the home view.
-We define a test method test_main_page_response to check the response of the main page.
-Inside the test method, we use self.client.get() to send a GET request to the main page using the generated URL.
-We use self.assertEqual() to assert that the response status code is 200, indicating that the page is accessible.
+TestCase from django.test for creating a test case.
+Import reverse from django.urls to generate the URL for the home view.
+Define a test method test_main_page_response to check the response of the main page.
+Inside the test method uses self.client.get() to send a GET request to the main page using the generated URL.
+Self.assertEqual() to assert that the response status code is 200, indicating that the page is accessible.
 
 ## Manual Tests
 
@@ -484,7 +468,7 @@ JUNK TRADER is successfully deployed on Heroku, You can access the live site at 
 
 ### JUNK TRADER vs BOUTIQUE ADO
 
-Moontube has leveraged the technology and architecture of the Code Institute Boutique_Ado project, introducing significant modifications to create a trading game platform. The project's foundation builds upon the eCommerce architecture, emphasising the adaptability and reusability of technology across diverse use cases.
+Junktrader has leveraged the technology and architecture of the Code Institute Boutique_Ado project, introducing significant modifications to create a trading game platform. The project's foundation builds upon the eCommerce architecture, emphasising the adaptability and reusability of technology across diverse use cases.
 
 
 **Database Management and AWS**

@@ -57,8 +57,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'junktrader.urls'
 
-# Import os module at the top
-import os
 
 TEMPLATES = [
     {
