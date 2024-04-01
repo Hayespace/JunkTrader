@@ -107,6 +107,7 @@ LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'junktrader.wsgi.application'
 
+
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -118,7 +119,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
