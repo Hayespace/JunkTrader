@@ -223,7 +223,7 @@ h6 {
 }
 
 .content-column {
-    padding-left: 5%;
+    padding-left: 10%;
 }
 
 .message-container {
@@ -271,6 +271,12 @@ h6 {
     background-color: transparent;
     border: 1px solid #ccc; 
     color: white; 
+}
+
+@media (max-width: 1360px) {
+    .content-column {
+        padding-left: 20%;
+    }
 }
 
 

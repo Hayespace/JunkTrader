@@ -336,9 +336,20 @@ Self.assertEqual() to assert that the response status code is 200, indicating th
     - Evaluated the platform's security measures, including authentication mechanisms, data encryption, and protection against common vulnerabilities such as XSS and CSRF.
     - Verified that user data is securely stored and transmitted.
 
-11. **Accessibility Testing:**
-    - Ensured that the platform is accessible to users with disabilities by testing with assistive technologies such as screen readers and keyboard navigation.
-    - Checked for compliance with accessibility standards and guidelines.
+
+## Additional Testing
+
+In addition to user story testing and manual tests, Junk Trader underwent thorough validation and analysis to ensure quality, performance, and compliance with standards.
+
+- **HTML Validation:** Validated all HTML code to ensure compliance with W3C standards for semantic markup and accessibility.
+- **CSS Validation:** Checked CSS files for errors and compliance with CSS standards to ensure consistent styling and layout across browsers. [Junk Trader CSS validation HERE](http://jigsaw.w3.org/css-validator/validator$linking)
+- **JavaScript Validation:** Ensured JavaScript code is error-free and adheres to best practices for functionality and interactivity. As JS is combined with HTML in most cases the validator finds and error where there is none.
+[Junk Trader JS validation HERE](https://codebeautify.org/jsvalidate/y2490ed09)
+- **Python Validation:** Ran Python code through static analysis tools and linting to identify potential issues and ensure adherence to PEP 8 coding standards.
+[Junk Trader Python validation HERE](https://www.online-ide.com/ZgHDkbdOKv)
+- **Lighthouse Report:** Generated Lighthouse reports to evaluate performance, accessibility, best practices, SEO, and progressive web app features.
+- **Responsive and Browser Testing:** Tested the platform across various devices, screen sizes, and browsers to ensure responsiveness and compatibility.
+
 
 These manual tests cover various aspects of Junk Trader, ensuring that the platform meets user expectations, provides a seamless user experience, and maintains security, performance, and accessibility standards.
 
@@ -462,7 +473,39 @@ These contexts are essential for providing information about the user's backpack
 
 ## Deployment
 
-JUNK TRADER is successfully deployed on Heroku, You can access the live site at [JUNK TRADER Website Link](https://junktrader-d1896583f35f.herokuapp.com/).
+JUNK TRADER is successfully deployed on Heroku. You can access the live site [here](https://junktrader-d1896583f35f.herokuapp.com/).
+
+
+### Environment Variables Setup:
+
+Before deploying my Django application to Heroku, I ensured all necessary environment variables were configured:
+
+- **AWS credentials**: I set up `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` for file storage on Amazon S3.
+- **Database URL**: I configured `DATABASE_URL` to connect to ElephantSQL, my PostgreSQL database provider.
+- **Email host credentials**: For sending emails, I provided `EMAIL_HOST_PASS` and `EMAIL_HOST_USER`.
+- **Security measures**: I included my Django secret key (`SECRET_KEY`) and Stripe secret key (`STRIPE_SECRET_KEY`) for security purposes.
+- **AWS usage flag**: To enable AWS services, I set `USE_AWS` to `True`.
+
+### Deployment Logs:
+
+- Using the Heroku-22 stack and `heroku/python` buildpack, I initiated the deployment process.
+- Specifying the Python version in the `runtime.txt` file, I ensured compatibility.
+- Deployment logs revealed no changes in requirements, leading to installation from cache for faster processing.
+- I collected static files using `python manage.py collectstatic --noinput`.
+- The `Procfile` defined process types, with the web process type being declared.
+- Upon successful launch, Heroku provided a URL for accessing my application.
+
+### Usage of AWS and ElephantSQL:
+
+- Leveraging AWS services, I utilised environment variables for static and media file storage.
+- By configuring `DATABASE_URL`, I established a connection to ElephantSQL for PostgreSQL database requirements.
+
+### Security Update Notification:
+
+- I remained vigilant for security updates related to the runtime environment, ensuring prompt upgrades to maintain application security.
+
+By following these steps, I successfully deployed my Django application to Heroku while integrating AWS for file storage and ElephantSQL for the database, ensuring a secure and efficient hosting environment.
+
 
 ## Credits
 
