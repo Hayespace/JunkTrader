@@ -74,8 +74,8 @@
             <form class="modal-form" method="POST" action="{% url 'add_to_backpack' collectable.id %}">
                 {% csrf_token %}
                 <div class="modal-body">
-                    <p>Owned: {{ item.quantity }}</p>
-                    <div class="form-group">
+                   
+                    <div class="form-group text-white">
                         <label for="buyQuantity{{ item.item_id }}">Enter Quantity to Buy:</label>
                         <input type="number" class="form-control" id="buyQuantity{{ item.item_id }}" name="quantity" min="0" max="99">
                     </div>
@@ -88,29 +88,7 @@
         </div>
     </div>
 </div>
-<!-- Sell Modal 
-<div class="modal fade" id="sellModal{{ collectable.id }}" tabindex="-1" role="dialog" aria-labelledby="sellModalLabel{{ collectable.id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="sellModalLabel{{ item.item_id }}">Sell {{ item.collectable.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <form class="modal-form" method="POST" action="{% url 'sell_item' collectable.id %}">
-            {% csrf_token %}
-            <div class="modal-body">
-                <p>Owned: {{ item.quantity }}</p>
-                <div class="form-group">
-                    <label for="sellQuantity{{ item.item_id }}">Enter Quantity to Sell:</label>
-                    <input type="number" class="form-control" id="sellQuantity{{ item.item_id }}" name="quantity" min="0" max="{{ item.quantity }}">
-                </div>
-            </div>
-            
-        </form>
-    </div>
-</div>-->
+
 </div>
 
 {% endblock %}

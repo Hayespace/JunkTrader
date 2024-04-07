@@ -5,7 +5,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+#SECRET_KEY = os.environ.get('SECRET_KEY', '')
+
+SECRET_KEY = 'wle4uk22x0sk5h$t1=njtb20j!2#a_!2^w@mr24$2+69x+!!%b'
 
 #DEBUG = 'DEVELOPMENT' in os.environ
 
@@ -18,8 +20,7 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-
-STRIPE_SECRET_KEY = 'sk_test_51OsmeYRwF6of2GXW3N9gqlhdDpt6LM63859cBjln9HFDud4ws3SJYcH9oGZiaghK0qioHl9wA6zVwn02xx6eI7Ep00p7bj4g7N'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
