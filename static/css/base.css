@@ -223,7 +223,7 @@ h6 {
 }
 
 .content-column {
-    padding-left: 10%;
+    padding-left: 5%;
 }
 
 .message-container {
@@ -279,8 +279,11 @@ h6 {
     }
 }
 
-
 @media (max-width: 767px) {
+    .content-column {
+        padding-left: 4%;
+    }
+
     #delivery-banner {
         position: fixed;
         bottom: 0;
@@ -295,6 +298,7 @@ h6 {
         max-width: none;
     }
 }
+
 
 @media (min-width: 1200px) {
     .container {
