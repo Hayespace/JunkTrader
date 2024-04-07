@@ -40,7 +40,7 @@
                         <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3 mb-3"> 
                             <div class="card box-upgrades border-2 text-white">
                                 {% if upgrade.glb_file %}
-                                    <model-viewer id="model-viewer-{{ upgrade.id }}" src="{{ upgrade.glb_file.url }}" alt="{{ upgrade.name }}" camera-controls style="width: 100%; height: 500px;"></model-viewer> <!-- Increase height for larger cards -->
+                                    <model-viewer id="model-viewer-{{ upgrade.id }}" src="{{ upgrade.glb_file.url }}" alt="{{ upgrade.name }}" camera-controls style="width: 100%; height: 500px;"></model-viewer> 
                                 {% else %}
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ upgrade.name }}">
                                 {% endif %}

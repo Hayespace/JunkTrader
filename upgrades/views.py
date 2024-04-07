@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.conf import settings
+from django.core.mail import send_mail
 from .models import Upgrade
 from django.contrib import messages
 import stripe
@@ -18,6 +19,12 @@ def upgrade_success(request, upgrade_id):
     
     # Add a success message
     messages.success(request, f"Successfully purchased {upgrade.name}. Backpack capacity increased to {upgrade.capacity}.")
+    
+    # Send email confirmation
+    subject = 'Upgrade Purchase Confirmation'
+    message = f"Dear {request.user.username},\n\nThank you for purchasing {upgrade.name}. Your backpack capacity has been increased to {upgrade.capacity}.\n\nBest regards,\nThe JunkTrader Team"
+    recipient_list = [request.user.email]
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
     
     # Redirect to the open_backpack page
     return redirect('open_backpack')
@@ -50,8 +57,4 @@ def purchase_upgrade(request, upgrade_id):
         # Redirect to the checkout session URL, which opens in a new window
         return redirect(session.url)
 
-    # Handle GET request (initial load or refresh)
-    # This part of the code was missing from the original implementation
-    # You need to handle the case where a user accesses the purchase_upgrade page directly without a POST request
-    # For example, if the user refreshes the page after submitting the form or if they access the URL directly
     return redirect('all_upgrades')
