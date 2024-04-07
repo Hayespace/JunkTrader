@@ -1,8 +1,8 @@
 # JUNK TRADER: A Post-Apocalyptic eCommerce Trading Game
 
-![responsiveness](/media/readme_images/responsive.png)
-![responsiveness](/media/readme_images/mobile_bp.png)
-![responsiveness](/media/readme_images/mobileview.png)
+![responsiveness1](/media/readme_images/responsive.png)
+![responsiveness2](/media/readme_images/mobile_bp.png)
+![responsiveness3](/media/readme_images/mobileview.png)
 
 **Visit Junk Trader at [Junk Trader](https://junktrader-d1896583f35f.herokuapp.com/)**
 
@@ -341,17 +341,62 @@ Self.assertEqual() to assert that the response status code is 200, indicating th
 
 In addition to user story testing and manual tests, Junk Trader underwent thorough validation and analysis to ensure quality, performance, and compliance with standards.
 
-- **HTML Validation:** Validated all HTML code to ensure compliance with W3C standards for semantic markup and accessibility.
+- **HTML Validation:** Validated all HTML code to ensure compliance with W3C standards for semantic markup and accessibility. The validator is expressing an error with JS but HTML code has no errors.
+![HTML Validation](/media/readme_images/jserror.png)
 - **CSS Validation:** Checked CSS files for errors and compliance with CSS standards to ensure consistent styling and layout across browsers. [Junk Trader CSS validation HERE](http://jigsaw.w3.org/css-validator/validator$linking)
+![CSS Validator](/media/readme_images/cssvalidator.png)
 - **JavaScript Validation:** Ensured JavaScript code is error-free and adheres to best practices for functionality and interactivity. As JS is combined with HTML in most cases the validator finds and error where there is none.
 [Junk Trader JS validation HERE](https://codebeautify.org/jsvalidate/y2490ed09)
 - **Python Validation:** Ran Python code through static analysis tools and linting to identify potential issues and ensure adherence to PEP 8 coding standards.
 [Junk Trader Python validation HERE](https://www.online-ide.com/ZgHDkbdOKv)
-- **Lighthouse Report:** Generated Lighthouse reports to evaluate performance, accessibility, best practices, SEO, and progressive web app features.
+![Python Validator](/media/readme_images/pythonval.png)
 - **Responsive and Browser Testing:** Tested the platform across various devices, screen sizes, and browsers to ensure responsiveness and compatibility.
 
+Several media queries have been implemented to ensure all of the functionality and features are availble across different screen sizes.
 
-These manual tests cover various aspects of Junk Trader, ensuring that the platform meets user expectations, provides a seamless user experience, and maintains security, performance, and accessibility standards.
+The side panel becomes a top navbar on small screens with just the icons for navigation.  Similarly the top interface become a fixed bottom panel for an app like feel.  All text is removed leaving only icons
+![Responsiveness](/media/readme_images/repsonsiveview2.png)
+
+
+      @media (max-width: 1360px) {
+         .content-column {
+            padding-left: 20%;
+         }
+      }
+
+      @media (max-width: 767px) {
+         .content-column {
+            padding-left: 0;
+         }
+
+         #delivery-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            margin: 0;
+            border-radius: 0;
+         }
+
+         #delivery-banner .list-inline-item {
+            max-width: none;
+         }
+      }
+
+
+- **Lighthouse Report:** Generated Lighthouse reports to evaluate performance, accessibility, best practices, SEO, and progressive web app features.
+![Lighhouse Report 1](/media/readme_images/lighthouseoveview.png)
+![Lighhouse Report 2](/media/readme_images/lh_access.png)
+![Lighhouse Report 3](/media/readme_images/lh_bestpractices.png)
+The deliberate inclusion of third-party cookies, particularly those linked to services like Stripe for payment processing, is essential for ensuring the smooth operation of specific features on the platform, facilitating secure transactions, and delivering a seamless user experience during payment processes.
+![Lighhouse Report 4](/media/readme_images/lh_performance.png)
+
+
+- **Unfixed Bugs:**
+I encountered two primary issues during the development process. Firstly, there was an intention to dynamically update and display location images in the side panel corresponding to each location mentioned. However, integrating this feature conflicted with the code responsible for updating prices, resulting in the images being reset along with the session each time the price updated. Despite efforts, I couldn't find a viable workaround without a substantial rewrite of the code, particularly considering the complexity of the update price function, which also handled day incrementation.
+
+Secondly, I aimed to implement a feature where the color of the price would change dynamically, displaying red for price decreases and green for increases. However, similar to the image update issue, the session reset prevented the color from persisting consistently. These unresolved errors were disappointing, as both features were crucial to enhancing gameplay, but their integration proved to be challenging within the project's scope. 
 
 ## Database Configuration
 
