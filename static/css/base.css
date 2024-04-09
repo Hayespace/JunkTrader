@@ -34,7 +34,7 @@ body {
 
 .btn-red {
     background: rgb(254, 0, 0);
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .btn-outline-black {
