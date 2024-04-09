@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             {% for collectable in collectables %}
-                <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3"> <!-- Add margin bottom for spacing -->
+                <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3"> 
                     <div class="card box h-100 border-2 text-white">
                         {% if collectable.glb_file %}
                         <a href="{% url 'collectable_detail' collectable.pk %}">
